@@ -1,0 +1,1417 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://webprotege.stanford.edu/project/C7gQgN8R5VuEoRwPFOduCb#"
+     xml:base="http://webprotege.stanford.edu/project/C7gQgN8R5VuEoRwPFOduCb"
+     xmlns:cognitive="http://cognitive.robotics.tut#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://webprotege.stanford.edu/project/C7gQgN8R5VuEoRwPFOduCb"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperState -->
+
+    <rdfs:Datatype rdf:about="http://cognitive.robotics.tut#GripperState"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cognitive.robotics.tut#activates -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#activates">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Utterance"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Skill"/>
+        <rdfs:label>activates</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#consistIn -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#consistIn">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Step"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:label>consistIn</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#contains -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#contains">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#PhysicalEntity"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#PhysicalEntity"/>
+        <rdfs:label>contains</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#doesFirst -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#doesFirst">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:label>doesFirst</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#doesThen -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#doesThen">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:label>doesThen</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasAction -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#hasAction">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Action"/>
+        <rdfs:label>hasAction</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasComponent -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#hasComponent">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Agent"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Component"/>
+        <rdfs:label>hasComponent</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasEntry -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#hasEntry">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Dictionary"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Utterance"/>
+        <rdfs:label>hasEntry</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasLocation -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#hasLocation">
+        <rdfs:label>hasLocation</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasPreCondition -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#hasPreCondition">
+        <rdfs:label>hasPreCondition</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasState -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#hasState">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Component"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Value"/>
+        <rdfs:label>hasState</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasStep -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#hasStep">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Skill"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:label>hasStep</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasTarget -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#hasTarget">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Action"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#PhysicalEntity"/>
+        <rdfs:label>hasTarget</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasWidth -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#hasWidth">
+        <rdfs:label>hasWidth</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#isDoneAfter -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#isDoneAfter">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>isDoneAfter</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#isDoneBy -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#isDoneBy">
+        <rdfs:label>isDoneBy</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#isFollowedBy -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#isFollowedBy">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Slot"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Slot"/>
+        <rdfs:label>isFollowedBy</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#isInvokedBy -->
+
+    <owl:ObjectProperty rdf:about="http://cognitive.robotics.tut#isInvokedBy">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Utterance"/>
+        <rdfs:range rdf:resource="http://cognitive.robotics.tut#Slot"/>
+        <rdfs:label>isInvokedBy</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasDeviation -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#hasDeviation">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Sensor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:label>hasDeviation</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasHeight -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#hasHeight">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#PhysicalEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:label>hasHeight</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasMaxPayload -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#hasMaxPayload">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Agent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:label>hasMaxPayload</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasMaxSpeed -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#hasMaxSpeed">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Actuator"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:label>hasMaxSpeed</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasName -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#hasName">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Agent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>hasName</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasResolution -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#hasResolution">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Sensor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:label>hasResolution</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasValue -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#hasValue">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#Slot"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>hasValue</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#hasWeight -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#hasWeight">
+        <rdfs:domain rdf:resource="http://cognitive.robotics.tut#PhysicalEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:label>hasWeight</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#value -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#value">
+        <rdfs:label>value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#x -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#x">
+        <rdfs:label>x</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#y -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#y">
+        <rdfs:label>y</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://cognitive.robotics.tut#z -->
+
+    <owl:DatatypeProperty rdf:about="http://cognitive.robotics.tut#z">
+        <rdfs:label>z</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cognitive.robotics.tut#Action -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Action">
+        <rdfs:label>Action</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Actuator -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Actuator">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Component"/>
+        <rdfs:label>Actuator</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Agent -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Agent">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#PhysicalEntity"/>
+        <rdfs:label>Agent</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#CartesianMotion -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#CartesianMotion">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasPreCondition"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#TargetReachable"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasTarget"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#Location"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>CartesianMotion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Component -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Component">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#MaterialThing"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Component</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#CompoundTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#CompoundTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:label>CompoundTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Constraint -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Constraint">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Value"/>
+        <rdfs:label>Constraint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Dictionary -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Dictionary">
+        <rdfs:label>Dictionary</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#ElementalTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#ElementalTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasAction"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#Action"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>ElementalTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Fluid -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Fluid">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#MaterialThing"/>
+        <rdfs:label>Fluid</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#ForceSensor -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#ForceSensor">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Sensor"/>
+        <rdfs:label>ForceSensor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GetSomething -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#GetSomething">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Skill"/>
+        <rdfs:label>GetSomething</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Glass -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Glass">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Item"/>
+        <rdfs:label>Glass</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Gripper -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Gripper">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Actuator"/>
+        <rdfs:label>Gripper</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperAvailable -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#GripperAvailable">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#GripperState"/>
+        <rdfs:label>GripperAvailable</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperBusy -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#GripperBusy">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#GripperState"/>
+        <rdfs:label>GripperBusy</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperMotion -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#GripperMotion">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasPreCondition"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#GripperOperational"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasPreCondition"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#TargetGraspable"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>GripperMotion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperOperational -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#GripperOperational">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Constraint"/>
+        <rdfs:label>GripperOperational</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperState -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#GripperState">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GrippingTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#GrippingTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#ElementalTask"/>
+        <rdfs:label>GrippingTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Human -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Human">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Agent"/>
+        <rdfs:label>Human</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#ImagingSensor -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#ImagingSensor">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Sensor"/>
+        <rdfs:label>ImagingSensor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Item -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Item">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#MaterialThing"/>
+        <rdfs:label>Item</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Joint -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Joint">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Actuator"/>
+        <rdfs:label>Joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#JointAction -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#JointAction">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+        <rdfs:label>JointAction</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Location -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Location">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Value"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#x"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#y"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#z"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Location</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#MaterialThing -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#MaterialThing">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#PhysicalEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasLocation"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#Location"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasWidth"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#Width"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasHeight"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasWeight"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>MaterialThing</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Measure -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Measure">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Value"/>
+        <rdfs:label>Measure</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#MoveTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#MoveTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#ElementalTask"/>
+        <rdfs:label>MoveTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#NullAction -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#NullAction">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+        <rdfs:label>NullAction</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#NullTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#NullTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#ElementalTask"/>
+        <rdfs:label>NullTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#PhysicalEntity -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#PhysicalEntity">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PhysicalEntity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#PickingTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#PickingTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#doesFirst"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#MoveTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#doesThen"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#GrippingTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>PickingTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#PlacingTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#PlacingTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#doesFirst"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#MoveTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#doesThen"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#ReleasingTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>PlacingTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#PoorWater_Step -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#PoorWater_Step">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Step"/>
+        <rdfs:label>PoorWater_Step</rdfs:label>
+    </owl:Class>
+
+
+    <!-- http://cognitive.robotics.tut#ReleasingTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#ReleasingTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#ElementalTask"/>
+        <rdfs:label>ReleasingTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Robot -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Robot">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Agent"/>
+        <rdfs:label>Robot</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#RotateTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#RotateTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#ElementalTask"/>
+        <rdfs:label>RotateTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Sensor -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Sensor">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Component"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasDeviation"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasResolution"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Sensor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Skill -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Skill">
+        <rdfs:label>Skill</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Slot -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Slot">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#isFollowedBy"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#Slot"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#hasValue"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Slot</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#SoundSensor -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#SoundSensor">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Sensor"/>
+        <rdfs:label>SoundSensor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Step -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Step">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#consistIn"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#Task"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#isDoneBy"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Step</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#TargetGraspable -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#TargetGraspable">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Constraint"/>
+        <rdfs:label>TargetGraspable</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#TargetReachable -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#TargetReachable">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Constraint"/>
+        <rdfs:label>TargetReachable</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Task -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Task">
+        <rdfs:label>Task</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#TransferTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#TransferTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#doesFirst"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#MoveTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#doesThen"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#RotateTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>TransferTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#UserTask -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#UserTask">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Task"/>
+        <rdfs:label>UserTask</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Utterance -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Utterance">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#activates"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#Skill"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#isInvokedBy"/>
+                <owl:someValuesFrom rdf:resource="http://cognitive.robotics.tut#Slot"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Utterance</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#ValidRotationAngle -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#ValidRotationAngle">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Constraint"/>
+        <rdfs:label>ValidRotationAngle</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Value -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Value">
+        <rdfs:label>Value</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Water -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Water">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Fluid"/>
+        <rdfs:label>Water</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Width -->
+
+    <owl:Class rdf:about="http://cognitive.robotics.tut#Width">
+        <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Measure"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://cognitive.robotics.tut#value"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Width</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cognitive.robotics.tut#CartesianMotion_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#CartesianMotion_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#CartesianMotion"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#TargetReachable_Constraint"/>
+        <rdfs:label>CartesianMotion_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#CartesianMotion_02 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#CartesianMotion_02">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#CartesianMotion"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#TargetReachable_Constraint"/>
+        <rdfs:label>CartesianMotion_02</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#CartesianMotion_03 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#CartesianMotion_03">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#CartesianMotion"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#TargetReachable_Constraint"/>
+        <rdfs:label>CartesianMotion_03</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#CartesianMotion_04 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#CartesianMotion_04">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#CartesianMotion"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#TargetReachable_Constraint"/>
+        <rdfs:label>CartesianMotion_04</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#CartesianMotion_Home -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#CartesianMotion_Home">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#CartesianMotion"/>
+        <rdfs:label>CartesianMotion_Home</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#End_Command -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#End_Command">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Slot"/>
+        <rdfs:label>End_Command</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#FrankaDictionary -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#FrankaDictionary">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Dictionary"/>
+        <rdfs:label>FrankaDictionary</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GetStep_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#GetStep_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Step"/>
+        <cognitive:consistIn rdf:resource="http://cognitive.robotics.tut#PickingTask_01"/>
+        <rdfs:label>GetStep_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Get_Argument -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#Get_Argument">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Slot"/>
+        <cognitive:isFollowedBy rdf:resource="http://cognitive.robotics.tut#End_Command"/>
+        <rdfs:label>Get_Argument</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Get_Command -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#Get_Command">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Slot"/>
+        <cognitive:isFollowedBy rdf:resource="http://cognitive.robotics.tut#Get_Argument"/>
+        <cognitive:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Get</cognitive:hasValue>
+        <rdfs:label>Get_Command</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Get_Skill -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#Get_Skill">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#GetSomething"/>
+        <cognitive:hasStep rdf:resource="http://cognitive.robotics.tut#GetStep_01"/>
+        <rdfs:label>Get_Skill</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Glass_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#Glass_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Glass"/>
+        <cognitive:hasLocation rdf:resource="http://cognitive.robotics.tut#Glass_Location"/>
+        <cognitive:hasWidth rdf:resource="http://cognitive.robotics.tut#Glass_Width"/>
+        <rdfs:label>Glass_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Glass_Location -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#Glass_Location">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Location"/>
+        <cognitive:x rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</cognitive:x>
+        <cognitive:y rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</cognitive:y>
+        <cognitive:z rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</cognitive:z>
+        <rdfs:label>Glass_Location</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Glass_Width -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#Glass_Width">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Width"/>
+        <cognitive:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">20.0</cognitive:value>
+        <rdfs:label>Glass_Width</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperAvailable_State -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#GripperAvailable_State">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#GripperAvailable"/>
+        <rdfs:label>GripperAvailable_State</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperBusy_State -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#GripperBusy_State">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#GripperBusy"/>
+        <rdfs:label>GripperBusy_State</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperMotion_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#GripperMotion_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#GripperMotion"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#GripperOperational_Constraint"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#TargetGraspable_Constraint"/>
+        <rdfs:label>GripperMotion_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperMotion_02 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#GripperMotion_02">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#GripperMotion"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#GripperOperational_Constraint"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#TargetGraspable_Constraint"/>
+        <rdfs:label>GripperMotion_02</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperMotion_03 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#GripperMotion_03">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#GripperMotion"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#GripperOperational_Constraint"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#TargetGraspable_Constraint"/>
+        <rdfs:label>GripperMotion_03</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GripperOperational_Constraint -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#GripperOperational_Constraint">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#GripperOperational"/>
+        <rdfs:label>GripperOperational_Constraint</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GrippingTask_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#GrippingTask_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#GrippingTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#GripperMotion_01"/>
+        <rdfs:label>GrippingTask_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#GrippingTask_02 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#GrippingTask_02">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#GrippingTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#GripperMotion_03"/>
+        <rdfs:label>GrippingTask_02</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Home_Location -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#Home_Location">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Location"/>
+        <cognitive:x rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</cognitive:x>
+        <cognitive:y rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</cognitive:y>
+        <cognitive:z rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</cognitive:z>
+        <rdfs:label>Home_Location</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#JointAction_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#JointAction_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#JointAction"/>
+        <cognitive:hasPreCondition rdf:resource="http://cognitive.robotics.tut#ValidRotationAngle_Constraint"/>
+        <rdfs:label>JointAction_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#MoveHome_Task -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#MoveHome_Task">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#MoveTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#CartesianMotion_Home"/>
+        <rdfs:label>MoveHome_Task</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#MoveTask_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#MoveTask_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#MoveTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#CartesianMotion_01"/>
+        <rdfs:label>MoveTask_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#MoveTask_02 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#MoveTask_02">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#MoveTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#CartesianMotion_02"/>
+        <rdfs:label>MoveTask_02</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#MoveTask_03 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#MoveTask_03">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#MoveTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#CartesianMotion_03"/>
+        <rdfs:label>MoveTask_03</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#MoveTask_04 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#MoveTask_04">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#MoveTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#CartesianMotion_04"/>
+        <rdfs:label>MoveTask_04</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#NullAction_00 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#NullAction_00">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#NullAction"/>
+        <rdfs:label>NullAction_00</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#NullTask_00 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#NullTask_00">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#NullTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#NullAction_00"/>
+        <rdfs:label>NullTask_00</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#PickingTask_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#PickingTask_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#PickingTask"/>
+        <cognitive:doesFirst rdf:resource="http://cognitive.robotics.tut#MoveTask_01"/>
+        <cognitive:doesThen rdf:resource="http://cognitive.robotics.tut#GrippingTask_01"/>
+        <rdfs:label>PickingTask_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#PickingTask_02 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#PickingTask_02">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#PickingTask"/>
+        <cognitive:doesFirst rdf:resource="http://cognitive.robotics.tut#MoveTask_02"/>
+        <cognitive:doesThen rdf:resource="http://cognitive.robotics.tut#GrippingTask_02"/>
+        <rdfs:label>PickingTask_02</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#PlacingTask_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#PlacingTask_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#PlacingTask"/>
+        <cognitive:doesFirst rdf:resource="http://cognitive.robotics.tut#MoveTask_02"/>
+        <cognitive:doesThen rdf:resource="http://cognitive.robotics.tut#ReleasingTask_01"/>
+        <rdfs:label>PlacingTask_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#ReleasingTask_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#ReleasingTask_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#ReleasingTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#GripperMotion_02"/>
+        <rdfs:label>ReleasingTask_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#RotateTask_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#RotateTask_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#RotateTask"/>
+        <cognitive:hasAction rdf:resource="http://cognitive.robotics.tut#JointAction_01"/>
+        <rdfs:label>RotateTask_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#TargetGraspable_Constraint -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#TargetGraspable_Constraint">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#TargetGraspable"/>
+        <rdfs:label>TargetGraspable_Constraint</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#TargetReachable_Constraint -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#TargetReachable_Constraint">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#TargetReachable"/>
+        <rdfs:label>TargetReachable_Constraint</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#TransferTask_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#TransferTask_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#TransferTask"/>
+        <cognitive:doesFirst rdf:resource="http://cognitive.robotics.tut#MoveTask_04"/>
+        <cognitive:doesThen rdf:resource="http://cognitive.robotics.tut#RotateTask_01"/>
+        <rdfs:label>TransferTask_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#ValidRotationAngle_Constraint -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#ValidRotationAngle_Constraint">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#ValidRotationAngle"/>
+        <rdfs:label>ValidRotationAngle_Constraint</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cognitive.robotics.tut#Water_01 -->
+
+    <owl:NamedIndividual rdf:about="http://cognitive.robotics.tut#Water_01">
+        <rdf:type rdf:resource="http://cognitive.robotics.tut#Water"/>
+        <cognitive:hasLocation rdf:resource="http://cognitive.robotics.tut#Glass_Location"/>
+        <cognitive:hasWidth rdf:resource="http://cognitive.robotics.tut#Glass_Width"/>
+        <rdfs:label>Water_01</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://cognitive.robotics.tut#GripperState">
+        <rdfs:label>GripperState</rdfs:label>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

@@ -1,0 +1,63 @@
+{% extends "cogrob-tut.html" %}
+
+{% block additionalCSS %}<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/modal_box.css') }}">{% endblock %}
+
+{% block content %}
+
+<div class="right">
+  <div class="title">New skill</div>
+  <div class="description">Teach a new skill to the robot.</div>
+
+  <form method="POST" id="skill-form" class="topBefore">
+
+    <!-- FIRST TAB : name of the skill -->
+    <div class="tab">
+      <h3>Name:</h3>
+      <p><input name="skill_name" type="text" placeholder="Name of the new skill"></input></p>
+    </div>
+
+    <!-- SECOND TAB : how to activate to skill -->
+    <div class="tab">
+      <h3>Sample utterances for the skill :</h3>
+       <ul class="utterance">
+         <li class="slot">
+           <input  name="utterance0-slot0" type="text"></input>
+         </li>
+       </ul>
+       <button type="button" id="new-utterance">Add an utterance</button>
+       <button type="button" id="new-slot">Add a slot</button>
+    </div>
+
+    <!-- THIRD TAB : content of the skill -->
+    <div class="tab">
+      <p>Steps:</p>
+      <!-- List of steps -->
+      <ul id="steps"/>
+
+      <button id="addStepButton">Add</button>
+    </div>
+
+    <!-- Buttons for navigation in the form: -->
+    <div style="overflow:auto;">
+     <div style="float:right;">
+       <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+       <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+     </div>
+    </div>
+
+    <!-- Circles which indicates the steps of the form: -->
+    <div style="text-align:center;margin-top:40px;">
+       <span class="step"></span>
+       <span class="step"></span>
+       <span class="step"></span>
+    </div>
+
+  </form>
+
+</div>
+
+<script src={{ url_for('static', filename='js/nStepsForm.js') }}></script>
+<script src={{ url_for('static', filename='js/DnD.js') }}></script>
+<script src={{ url_for('static', filename='js/modalBox.js') }}></script>
+<script src={{ url_for('static', filename='js/utterances.js') }}></script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "cogrob-tut.html" %}
+
+{% block content %}
+<div class="right">
+  <div class="title">Franka Knowledge Base</div>
+  <div class="description">Teach new skills to the robot or just browse through the already existing ones.</div>
+
+  <div class="row">
+    <div class="column">
+    <div class="sub-title">Skills</div>
+    <div class="asset-category">
+      {% if result %}
+        {% for value in result %}
+        <a href="{{ url_for('skills.read', name=value) }}">
+          <div class="category skill">
+            <div class="asset">
+              <div class="asset-logo"><i class="fa"></i></div>
+            </div>
+              <div class="asset-name">{{ value }}</div>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+
+      {% else %}
+        <h3>Sorry, there is no skill available yet. Start by teaching one to the robot !</h3>
+      {% endif %}
+
+      <div class="asset-category" style="position:absolute;bottom: 0;margin-bottom: 30px;">
+        <a href="{{ url_for('skills.create') }}">
+          <div class="category skill">
+            <div class="asset">
+              <div class="asset-logo"><i class="fa"></i></div>
+            </div>
+            <div class="asset-name">New skill</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

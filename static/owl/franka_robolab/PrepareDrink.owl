@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:cogrobtut="http://cognitive.robotics.tut#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#utterance0">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Utterance"/>
+    <cogrobtut:isFollowedBy rdf:resource="http://cognitive.robotics.tut#Drink_Slot"/>
+    <cogrobtut:isInvokedBy rdf:resource="http://cognitive.robotics.tut#Prepare_Slot"/>
+    <cogrobtut:activates rdf:resource="http://cognitive.robotics.tut#PrepareDrink"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#Task_1">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Task"/>
+    <cogrobtut:hasAction rdf:resource="http://cognitive.robotics.tut#PlacingTask_Action1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#Prepare_Slot">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Slot"/>
+    <cogrobtut:hasValue>Prepare</cogrobtut:hasValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#Serve">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Step"/>
+    <cogrobtut:consistsIn rdf:resource="http://cognitive.robotics.tut#Task_2"/>
+    <cogrobtut:isDoneAfter rdf:resource="http://cognitive.robotics.tut#GetGlass"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#PrepareDrink">
+    <cogrobtut:hasStep rdf:resource="http://cognitive.robotics.tut#GetGlass"/>
+    <cogrobtut:hasStep rdf:resource="http://cognitive.robotics.tut#HandGlass"/>
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Skill"/>
+    <cogrobtut:hasStep rdf:resource="http://cognitive.robotics.tut#Serve"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#HandGlass">
+    <cogrobtut:isDoneAfter rdf:resource="http://cognitive.robotics.tut#Serve"/>
+    <cogrobtut:consistsIn rdf:resource="http://cognitive.robotics.tut#Task_5"/>
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Step"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#Task_0">
+    <cogrobtut:doesFirst rdf:resource="http://cognitive.robotics.tut#PickingTask_Action0"/>
+    <cogrobtut:doesThen rdf:resource="http://cognitive.robotics.tut#Task_1"/>
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Task"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#Task_2">
+    <cogrobtut:doesFirst rdf:resource="http://cognitive.robotics.tut#PickingTask_Action2"/>
+    <cogrobtut:doesThen rdf:resource="http://cognitive.robotics.tut#Task_3"/>
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Task"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#PickingTask_Action0">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#Task_4">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Task"/>
+    <cogrobtut:hasAction rdf:resource="http://cognitive.robotics.tut#PlacingTask_Action4"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#Task_3">
+    <cogrobtut:doesFirst rdf:resource="http://cognitive.robotics.tut#PouringLiquidTask_Action3"/>
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Task"/>
+    <cogrobtut:doesThen rdf:resource="http://cognitive.robotics.tut#Task_4"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#PickingTask_Action5">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#PickingTask_Action2">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#Drink_Slot">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Slot"/>
+    <cogrobtut:hasValue>Drink</cogrobtut:hasValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#Task_5">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Task"/>
+    <cogrobtut:hasAction rdf:resource="http://cognitive.robotics.tut#PickingTask_Action5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#GetGlass">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Step"/>
+    <cogrobtut:consistsIn rdf:resource="http://cognitive.robotics.tut#Task_0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#FrankaDictionary">
+    <cogrobtut:hasEntry rdf:resource="http://cognitive.robotics.tut#utterance0"/>
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Dictionary"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#PlacingTask_Action1">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#PouringLiquidTask_Action3">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://cognitive.robotics.tut#PlacingTask_Action4">
+    <rdfs:subClassOf rdf:resource="http://cognitive.robotics.tut#Action"/>
+  </rdf:Description>
+</rdf:RDF>
