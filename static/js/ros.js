@@ -8,21 +8,29 @@ var listeners = [];
         CONNECTION TO ROS
 ########################################################################## */
 
-var ros = new ROSLIB.Ros({
-  url : 'ws://localhost:9090'
-});
+//var ros = new ROSLIB.Ros({
+//  url : 'ws://localhost:9090'
+//});
 
-ros.on('connection', function() {
-  console.log('Connected to websocket server.');
-});
 
-ros.on('error', function(error) {
-  console.log('Error connecting to websocket server: ', error);
-});
+function connectToROS(webserver_url){
+  console.log("Trying to connect...")
+  ros = new ROSLIB.Ros({
+    url : webserver_url
+  });
+}
 
-ros.on('close', function() {
-  console.log('Connection to websocket server closed.');
-});
+function alert_success(){
+  $(".alert")[0].innerHTML = "Connection successful !";
+  $(".alert")[0].classList = ["alert alert-success show"];
+  dismiss_alert();
+}
+
+function alert_failure(){
+  $(".alert")[0].innerHTML = "Unable to connect...";
+  $(".alert")[0].classList = ["alert alert-danger show"];
+  dismiss_alert();
+}
 
 function updateStateIndicator(state) {
   $('#indicator_state .badge')[0].innerHTML = state;
@@ -46,15 +54,9 @@ function updateRobotState(new_state){
   updateStateIndicator(new_state);
 }
 
-function connectToROS(webserver_url){
-  ros = new ROSLIB.Ros({
-    url : webserver_url
-  });
-  return ros
-}
-
 function connected_callback(){
-  $.getJSON($SCRIPT_ROOT + '/robot/connect', {
+  alert_success();
+  /*$.getJSON($SCRIPT_ROOT + '/robot/connect', {
     url: ros.socket.url }, function(data) {
       updateIndicator();
   });
@@ -79,9 +81,11 @@ function connected_callback(){
 
   listeners.push(listener);
   // say("Robot connected");
+  */
 }
 
 function error_callback(){
+    alert_failure();
     console.log('Error connecting to websocket server: ', error);
 }
 
@@ -91,6 +95,107 @@ function disconnected_callback() {
     listener.unsubscribe();
   });
 }
+
+$('#connect').bind('click', function(e) {
+  e.preventDefault()
+  connectToROS($('input[name="url"]').val())
+  ros.on('connection', connected_callback);
+  ros.on('error', error_callback);
+  ros.on('close', disconnected_callback);
+});
+
+/* ##########################################################################
+        TEST BENCH
+########################################################################## */
+
+$('#start_grasp').bind('click', function(e) {
+  e.preventDefault()
+  var testTopic = new ROSLIB.Topic({
+    ros : ros,
+    name : '/test_bench',
+    messageType : 'cobot_controllers/Test'
+  });
+
+  console.log("Starting routine....");
+
+  var new_test = new ROSLIB.Message({
+    width : parseFloat($('input[name="width"]').val()),
+    force : parseInt($('input[name="force"]').val()),
+    reps : parseInt($('input[name="reps"]').val())
+  });
+
+  console.log(new_test);
+  testTopic.publish(new_test);
+});
+
+$('#move_start').bind('click', function(e) {
+  e.preventDefault()
+  var move_start_topic = new ROSLIB.Topic({
+    ros : ros,
+    name : '/move_start',
+    messageType : 'std_msgs/Empty'
+  });
+  console.log("Go to start");
+  var new_move = new ROSLIB.Message({});
+  move_start_topic.publish(new_move);
+});
+
+$('#move_approach').bind('click', function(e) {
+  e.preventDefault()
+  var approachTopic = new ROSLIB.Topic({
+    ros : ros,
+    name : '/approach_cmd',
+    messageType : 'std_msgs/Empty'
+  });
+  console.log("approach_cmd");
+  var new_move = new ROSLIB.Message({});
+  approachTopic.publish(new_move);
+});
+
+$('#test_height').bind('click', function(e) {
+  e.preventDefault()
+  var testHeightTopic = new ROSLIB.Topic({
+    ros : ros,
+    name : '/height_test',
+    messageType : 'std_msgs/Float32'
+  });
+  console.log("Test height....");
+  var new_height = new ROSLIB.Message({
+    data : parseFloat($('input[name="height"]').val())
+  });
+  testHeightTopic.publish(new_height);
+});
+
+$('#opening').bind('click', function(e) {
+  e.preventDefault()
+  var openingTopic = new ROSLIB.Topic({
+    ros : ros,
+    name : '/franka_gripper/move/goal',
+    messageType : 'franka_gripper/MoveActionGoal'
+  });
+  console.log("Opening");
+  var new_opening = new ROSLIB.Message({
+    goal :
+            {
+                width: 0.08,
+                speed: 20.0
+            }
+
+  });
+  openingTopic.publish(new_opening);
+});
+
+$('#homing').bind('click', function(e) {
+  e.preventDefault()
+  var homingTopic = new ROSLIB.Topic({
+    ros : ros,
+    name : '/homing_cmd',
+    messageType : 'std_msgs/Empty'
+  });
+  console.log("Homing");
+  var new_homing = new ROSLIB.Message({});
+  homingTopic.publish(new_homing);
+});
 
 /* ##########################################################################
         DISPLAY PLANER STATUS
@@ -231,13 +336,6 @@ $('#demonstration-modal').on('hidden.bs.modal', function (e) {
   stopRecording.publish(signal);
 })
 
-$('#connect').bind('click', function(e) {
-  e.preventDefault()
-  connectToROS($('input[name="url"]').val())
-  ros.on('connection', connected_callback);
-  ros.on('error', error_callback);
-  ros.on('close', disconnected_callback);
-});
 
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
