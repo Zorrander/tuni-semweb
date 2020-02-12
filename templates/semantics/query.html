@@ -1,0 +1,71 @@
+{% extends "cogrob-tut.html" %}
+
+{% block container %}
+
+<div class="container-fluid">
+
+
+  <!-- DataTables Example -->
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="fas fa-table"></i>
+      Send a query</div>
+      <div class="card-body">
+        <form method="POST" id="form" class="topBefore">
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">SPARQL</label>
+            <textarea class="form-control w-50" id="message" name="query" type="text" rows="5"></textarea>
+          </div>
+
+          <button id="submit" type="submit" class="btn btn-primary mb-2">Query</button>
+        </form>
+      </div>
+      <div class="card-footer small text-muted">Queries can be saved in .rq files to be used again later.</div>
+
+
+
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+          Result</div>
+          <div class="card-body">
+            {% if query_result %}
+            {{query}}
+            {% endif %}
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Value</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                {% if query_result %}
+                {% for value in query_result %}
+                <tr>
+                  <td> {{ value }} </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td> No result </td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+
+      </div>
+      <script src={{ url_for('static', filename='js/kb.js') }}></script>
+    </div>
+
+
+
+    {% endblock %}

@@ -1,0 +1,28 @@
+{% extends "cogrob-tut.html" %}
+
+{% block container %}
+
+<div class="container-fluid">
+
+  <div class="collapse show" id="collapseExample">
+    <div class="card card-body mb-3">
+      <form method="POST" id="form" class="topBefore">
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Rosbridge server</label>
+          <input id="text" class="w-50 border rounded form-control" type="text" style="margin-bottom:10px" name="url" title="url..." placeholder="url..." required>
+        </div>
+        <button id="connect" class="btn btn-primary mb-2">Connect</button>
+      </form>
+      <div class="card-footer small text-muted">The default value for the rosbridge server is ws://localhost:9090.</div>
+    </div>
+  </div>
+
+  <div class="alert  fade" role="alert"></div>
+
+
+  <script src={{ url_for('static', filename='js/index.js') }}></script>
+  
+
+</div>
+
+{% endblock %}

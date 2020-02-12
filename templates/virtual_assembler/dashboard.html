@@ -1,0 +1,49 @@
+{% extends "cogrob-tut.html" %}
+
+{% block container %}
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="card bg-light mb-3" style="max-width: 18rem;">
+      <div class="card-header">Models</div>
+      <div class="card-body">
+        <h5 class="card-title">Upload new 3D CAD models</h5>
+        <p class="card-text">Select gltf/glb files to be imported.</p>
+        <form action="/upload-image" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label>Select image</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="image" id="image">
+            <label class="custom-file-label" for="image">Select image...</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload</button>
+
+      </form>
+        <a href="{{ url_for('threejs') }}" type="button" class="btn btn-primary">Upload</a>
+      </div>
+    </div>
+
+
+    <div class="card bg-light mb-3" style="max-width: 18rem;">
+      <div class="card-header">Skills</div>
+      <div class="card-body">
+        <h5 class="card-title">Teach a new assembly</h5>
+        <p class="card-text">Define and virtually assemble a new object.</p>
+        <a href="{{ url_for('threejs') }}" type="button" class="btn btn-primary">Teach</a>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src={{ url_for('static', filename='js/index.js') }}></script>
+
+
+</div>
+
+{% endblock %}

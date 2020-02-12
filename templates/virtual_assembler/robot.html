@@ -1,0 +1,462 @@
+{% extends "cogrob-tut.html" %}
+
+{% block container %}
+
+<script src={{ url_for('static', filename='js/three.js') }}></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r92/examples/js/loaders/GLTFLoader.js"></script>
+<script src={{ url_for('static', filename='js/DragControl.js') }}></script>
+<script src={{ url_for('static', filename='js/dat.gui.min.js') }}></script>
+
+
+<div id="canvas" style="width:100%;height:100%">
+
+  <!-- Receive the Three.js interface -->
+
+</div>
+
+
+<script >
+  let container;
+  let camera;
+  let renderer;
+  let scene;
+  let controls ;
+  let objects, owl_descr ;
+  let pickedObject;
+  let mesh;
+
+  var guis = []
+
+  var pointLight, pointLight2;
+  var raycaster = new THREE.Raycaster();
+  var mouse = new THREE.Vector2() ;
+
+  var selected = [];
+
+  var box = new THREE.BoxGeometry(1, 1, 1);
+  var sphere = new THREE.SphereGeometry(.65, 32, 32);
+
+  var singleGeometry = new THREE.Geometry();
+
+  var boxMesh = new THREE.Mesh(box);
+  var sphereMesh = new THREE.Mesh(sphere);
+
+  boxMesh.updateMatrix(); // as needed
+  singleGeometry.merge(boxMesh.geometry, boxMesh.matrix);
+
+  sphereMesh.updateMatrix(); // as needed
+  singleGeometry.merge(sphereMesh.geometry, sphereMesh.matrix);
+
+  var material = new THREE.MeshPhongMaterial({color: 0xFF0000});
+  var new_mesh = new THREE.Mesh(singleGeometry, material);
+
+  function raycast( event ) {
+
+    // calculate mouse position in normalized device coordinates
+    // (-1 to +1) for both components
+
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    console.log(mouse.x);
+    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+    console.log(mouse.y);
+
+    //2. set the picking ray from the camera position and mouse coordinates
+    raycaster.setFromCamera( mouse, camera );
+
+    //3. compute intersections
+    var intersects = raycaster.intersectObjects( scene.children );
+
+    // If an object is clicked on
+    if (intersects.length > 0) {
+      for ( var i = 0; i < selected.length; i++ ) {
+        console.log("SELECTED OBJECTS: " + selected[i].object.name);
+      }
+
+      found = false;
+      for ( var i = 0; i < selected.length; i++ ) {
+        if (intersects[ 0 ].object.name == selected[ i ].object.name) {  // Obj was already selected
+          found = true;
+          intersects[ 0 ].object.material.color.setHex(0xffffff);
+          selected.splice(i, 1);
+          render();
+        }
+      }
+
+      if (!found){
+        selected.push(intersects[ 0 ]);
+
+        intersects[ 0 ].object.material.color.setHex(0xff0000);
+        console.log("Selected object: " + intersects[ 0 ].object.name);
+        render();
+      }
+    }
+
+
+
+    console.log(selected)
+    console.log(owl_descr)
+
+    for ( var i = 0; i < intersects.length; i++ ) {
+      console.log( intersects[ i ] );
+      console.log( intersects[ i ].object.name);
+      /*
+      An intersection has the following properties :
+      - object : intersected object (THREE.Mesh)
+      - distance : distance from camera to intersection (number)
+      - face : intersected face (THREE.Face3)
+      - faceIndex : intersected face index (number)
+      - point : intersection point (THREE.Vector3)
+      - uv : intersection point in the object's UV coordinates (THREE.Vector2)
+      */
+    }
+
+  }
+
+  function init() {
+    // Get a reference to the container element that will hold our scene
+    container = document.querySelector( '#canvas' );
+    // create a Scene
+    scene = new THREE.Scene();
+
+    //scene.add( new THREE.AmbientLight( 0xFFFFFF ) );
+    scene.background = new THREE.Color( 0xF5F5DC );
+
+    objects = [];
+    owl_descr = [];
+
+    createCamera();
+    createRenderer();
+    createLights();
+    //pointLight = createLight( 0x0088ff );
+    //scene.add( pointLight );
+    //pointLight2 = createLight( 0xff8888 );
+    //scene.add( pointLight2 );
+    //
+    loadModels( "cranfield" )
+
+    container.addEventListener( 'click', raycast, false );
+    // start the animation loop
+    renderer.setAnimationLoop( () => {
+      update();
+      render();
+    } );
+
+  }
+
+  function createCamera() {
+    // set up the options for a perspective camera
+    const fov = 70; // fov = Field Of View
+    const aspect = window.innerWidth / window.innerHeight;
+    const near = 1;
+    const far = 10000;
+    camera = new THREE.PerspectiveCamera(  fov, aspect, near, far );
+
+    camera.position.set( 5, 30, 100 );
+    camera.rotation.x = -20 * Math.PI / 180
+    camera.rotation.y = -10 * Math.PI / 180
+  }
+
+  function generateTexture() {
+    var canvas = document.createElement( 'canvas' );
+    canvas.width = 2;
+    canvas.height = 2;
+    var context = canvas.getContext( '2d' );
+    context.fillStyle = 'white';
+    context.fillRect( 0, 1, 2, 1 );
+    return canvas;
+  }
+
+  function createLights() {
+    var light = new THREE.DirectionalLight( 0xffffff, 1 );
+    light.position.set( 0, 60, 100 ).normalize();
+    light.castShadow = true;
+    scene.add( light );
+  }
+
+  function loadModels( name ) {
+
+    const loader = new THREE.GLTFLoader();
+
+    var texture = new THREE.CanvasTexture( generateTexture() );
+    texture.magFilter = THREE.NearestFilter;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.repeat.set( 1, 4.5 );
+
+    var material = new THREE.MeshPhongMaterial( {
+						side: THREE.DoubleSide,
+						alphaMap: texture,
+						alphaTest: 0.5,
+            color:0xffffff
+			} );
+
+
+      var size = {
+        a: false,
+        b: false
+      };
+
+      var shape = {
+        a: false,
+        b: false
+      };
+
+      var part = {
+        selected: false
+      }
+
+      function setSize( prop, name ){
+        for (let param in size){
+          size[param] = false;
+        }
+        size[prop] = true;
+        for (let dico in owl_descr){
+          if (Object.keys(dico)[0] == name)  {
+            dico[name]["size"] = size[prop];
+            console.log("found size");
+          }
+        }
+      }
+
+      function setShape( prop, name ){
+        for (let param in shape){
+          shape[param] = false;
+        }
+        shape[prop] = true;
+        for (let dico in owl_descr){
+          if (Object.keys(dico)[0] == name) {
+            console.log("found shape");
+            dico[name]["shape"] = shape[prop];
+          }
+        }
+      }
+
+      function select_part(name) {
+        console.log(name);
+      }
+
+      function test( name ){
+        console.log(name);
+      }
+    // A reusable function to set up the models. We're passing in a position parameter
+    // so that they can be individually placed around the scene
+    const onLoad = ( gltf, position, name, gui ) => {
+      obj = gltf.scene.children[ 2 ];
+      console.log(obj);
+      obj.name = name;
+      obj.material = material ;
+      obj.receiveShadow = true;
+      obj.position.copy( position );
+      obj.scale.set(.3, .3, .3) ;
+      scene.add( obj );
+      objects.push( obj );
+      owl_descr.push({
+          [name]: {}
+      });
+      // String field
+      // new_gui.add(intersects[ 0 ].object, "name");
+      folder = gui.addFolder(name);
+      console.log(folder);
+      folder.add(part, 'selected').name('Select').listen().onChange(function(){select_part(selected, intersects[ 0 ].object.name)});
+      var size_prop = folder.addFolder("Size");
+      var size1 = size_prop.add(size, 'a').name('Big').listen().onChange(function(){setSize("a", intersects[ 0 ].object.name)});
+      var size2 = size_prop.add(size, 'b').name('Small').listen().onChange(function(){setSize("b", intersects[ 0 ].object.name)});
+
+      var shape_prop = folder.addFolder("Shape");
+      var shape1 = shape_prop.add(shape, 'a').name('Round').listen().onChange(function(){setShape("a", intersects[ 0 ].object.name)});
+      var shape2 = shape_prop.add(shape, 'b').name('Square').listen().onChange(function(){setShape("b", intersects[ 0 ].object.name)});
+
+    };
+    // the loader will report the loading progress to this function
+    const onProgress = () => {};
+    // the loader will send any error messages to this function, and we'll log
+    // them to to console
+    const onError = ( errorMessage ) => { console.log( errorMessage ); };
+    var gui2 = new dat.GUI();
+    if (name == "skull") {
+      var objectPosition = new THREE.Vector3( 0, 0, 0 );
+      loader.load( "{{ url_for('static', filename='models/robot_skull/Compound001_Ear_Attachment_Adaptor.glb') }}", gltf => onLoad( gltf, objectPosition, "backplate", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 0, 2.5, 0 );
+      loader.load( "{{ url_for('static', filename='models/robot_skull/Compound001_Ear_Attachment_Adaptor2.glb') }}", gltf => onLoad( gltf, objectPosition, "roundPeg", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 0, 5, 0 );
+      loader.load( "{{ url_for('static', filename='models/robot_skull/Compound002_Audio_Cavity_Adapter.glb') }}", gltf => onLoad( gltf, objectPosition, "roundPeg2", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 2.5, 0, 0 );
+      loader.load(" {{ url_for('static', filename='models/robot_skull/Compound002_Audio_Cavity_Adapter3.glb') }}", gltf => onLoad( gltf, objectPosition, "roundPeg3", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 5, 0, 0 );
+      loader.load( "{{ url_for('static', filename='models/robot_skull/Compound003_Sensor_Holder_Mirrored_Sensor_Holder_Holes.glb') }}", gltf => onLoad( gltf, objectPosition, "squarePeg", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 7.5, 7.5, 7.5 );
+      loader.load( "{{ url_for('static', filename='models/robot_skull/Compound003_Sensor_Holder_Mirrored_Sensor_Holder_Holes2.glb') }}", gltf => onLoad( gltf, objectPosition, "squarePeg2", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 7.5, 0, 2.5 );
+      loader.load( "{{ url_for('static', filename='models/robot_skull/Sensor_Holder.glb') }}", gltf => onLoad( gltf, objectPosition, "pendulum", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 10, 0, 2.5 );
+      loader.load(" {{ url_for('static', filename='models/robot_skull/Skull.glb') }}", gltf => onLoad( gltf, objectPosition, "skull", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 0, 0, 5 );
+      loader.load( "{{ url_for('static', filename='models/robot_skull/Mirrored012_Mounting_Slots_Facade_Chin.glb') }}", gltf => onLoad( gltf, objectPosition, "pendulumHead", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 10, 0, 2.5 );
+      loader.load( "{{ url_for('static', filename='models/robot_skull/Pocket021_Base_Plate_Magnet_Recess.glb') }}", gltf => onLoad( gltf, objectPosition, "separator", gui2 ), onProgress, onError );
+    } else if (name == "cranfield") {
+
+      var objectPosition = new THREE.Vector3( 0, 0, 2.5 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/plate.glb') }}", gltf => onLoad( gltf, objectPosition, "faceplate", gui2 ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 0, 0, 5 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/plate.glb') }}", gltf => onLoad( gltf, objectPosition, "backplate", gui2  ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 20, 20, 20 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/pendulum.glb') }}", gltf => onLoad( gltf, objectPosition, "pendulum", gui2  ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 0, 2.5, 0 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/peg.glb') }}", gltf => onLoad( gltf, objectPosition, "roundPeg", gui2  ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 0, 5, 0 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/peg.glb') }}", gltf => onLoad( gltf, objectPosition, "roundPeg2", gui2  ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 2.5, 0, 0 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/peg.glb') }}", gltf => onLoad( gltf, objectPosition, "roundPeg3", gui2  ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 5, 0, 0 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/square_peg.glb') }}", gltf => onLoad( gltf, objectPosition, "squarePeg", gui2  ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 7.5, 7.5, 7.5 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/square_peg.glb') }}", gltf => onLoad( gltf, objectPosition, "squarePeg2", gui2  ), onProgress, onError );
+
+      objectPosition = new THREE.Vector3( 10, 0, 2.5 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/head.glb') }}", gltf => onLoad( gltf, objectPosition, "pendulumHead", gui2  ), onProgress, onError );
+      objectPosition = new THREE.Vector3( 10, 0, 2.5 );
+      loader.load( "{{ url_for('static', filename='models/cranfield_assy/separator.glb') }}", gltf => onLoad( gltf, objectPosition, "separator", gui2  ), onProgress, onError );
+    }
+
+    createControls();
+    console.log(objects);
+    console.log(owl_descr);
+
+  }
+
+  function createRenderer() {
+    // create a WebGLRenderer and set its width and height
+    renderer = new THREE.WebGLRenderer();
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    // add the automatically created <canvas> element to the page
+    //allow us to use real-world lighting units in our lighting setup
+    //renderer.physicallyCorrectLights = true;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.BasicShadowMap;
+    container.appendChild( renderer.domElement );
+  }
+
+  function dragStartCallback(event) {
+    startColor = event.object.material.color.getHex();
+    event.object.material.color.setHex(0x000000);
+    render()
+  }
+
+  function dragEndCallback(event) {
+    event.object.material.color.setHex(startColor);
+    render()
+  }
+
+  function createControls() {
+    // camera_controls = new THREE.OrbitControls( camera, container );
+
+    controls = new THREE.DragControls( objects, camera, renderer.domElement );
+    controls.addEventListener( 'dragstart', dragStartCallback );
+    controls.addEventListener( 'dragend', dragEndCallback );
+  }
+
+  // perform any updates to the scene, called once per frame
+  // avoid heavy computation here
+  function update() {
+  }
+
+
+  // render, or 'draw a still image', of the scene
+  function render() {
+    var time = performance.now() * 0.001;
+    /*pointLight.position.x = Math.sin( time * 0.6 ) * 9;
+    pointLight.position.y = Math.sin( time * 0.7 ) * 9 + 6;
+    pointLight.position.z = Math.sin( time * 0.8 ) * 9;
+    pointLight.rotation.x = time;
+    pointLight.rotation.z = time;
+    time += 10000;
+    pointLight2.position.x = Math.sin( time * 0.6 ) * 9;
+    pointLight2.position.y = Math.sin( time * 0.7 ) * 9 + 6;
+    pointLight2.position.z = Math.sin( time * 0.8 ) * 9;
+    pointLight2.rotation.x = time;
+    pointLight2.rotation.z = time;
+    */
+    renderer.render( scene, camera );
+
+  }
+
+  //var loader = new THREE.GLTFLoader();
+  //loader.load( "{{ url_for('static', filename='model.glb') }}", function ( gltf ) {
+  //     scene.add( gltf.scene );
+  //    } );
+
+  function onWindowResize() {
+    // set the aspect ratio to match the new browser window aspect ratio
+    camera.aspect = window.innerWidth / window.innerHeight;
+    // update the camera's frustum
+    camera.updateProjectionMatrix();
+    // update the size of the renderer AND the canvas
+    renderer.setSize( window.innerWidth, window.innerHeight );
+  }
+
+  const handleResponse = ({ target }) => {
+    // Do something useful here...
+    console.log(target.responseText)
+  }
+
+  // call the init function to set everything up
+  init();
+
+
+  const mergedGeom = new THREE.BufferGeometry()
+  var gui = new dat.GUI();
+
+  guis.push(gui)
+  var options = {
+    assemble: function() {
+      console.log("Assemble:")
+      for ( var i = 0; i < selected.length; i++ ) {
+        console.log(" "+selected[ i ].object.name + " +");
+        const mergedGeom = new THREE.BufferGeometry()
+        selected[ 0 ].object.attach(selected[ 1 ].object)
+      }
+    },
+    reset: function() {
+      console.log("Reset");
+      console.log(guis)
+      selected = [];
+      for ( var i = 1; i < guis.length; i++ ) {
+        guis[i].destroy();
+      }
+      guis.splice(1, guis.length-1);
+      console.log(guis)
+    },
+    upload: function() {
+      const xhr = new XMLHttpRequest()
+      xhr.open('POST', '/new_skill')
+
+      xhr.setRequestHeader("Content-Type", 'application/json');
+      var JSON_sent = {"input": objects[0].name};
+
+      xhr.onload = function (e) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var JSON_received = JSON.parse(xhr.responseText);
+          //handle received JSON here
+        } else {
+          console.log(xhr.responseText);
+        }
+      };
+      xhr.send(JSON.stringify(JSON_sent));
+    }}
+
+    gui.add(options, 'assemble').name('Assemble');
+    gui.add(options, 'reset').name('Reset');
+    gui.add(options, 'upload').name('Upload');
+    gui.add( camera.position , 'x', -500, 500 ).step(5);
+    gui.add( camera.position , 'y', -500, 500 ).step(5);
+    gui.add( camera.position , 'z', -500, 500 ).step(5);
+
+
+    window.addEventListener( 'resize', onWindowResize );
+
+
+  </script>
+
+  {% endblock %}
