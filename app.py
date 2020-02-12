@@ -8,17 +8,17 @@ from jena_reasoning.owl import Knowledge
 from flask import Flask, Blueprint, render_template, jsonify, request
 
 
-app = Flask(__name__)
+APP = Flask(__name__)
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), '/static/models')
 
 print("Upload folder: " + UPLOAD_FOLDER)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+APP.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 '''
 INDEX PAGE
 '''
-@app.route('/')
+@APP.route('/')
 def index():
     return render_template('index.html')
 
@@ -28,16 +28,16 @@ def index():
 ADD KNOWLEDGE
 '''
 
-@app.route('/ontologies')
+@APP.route('/ontologies')
 def knowledge_base():
     return render_template('semantics/knowledge_base.html')
 
-@app.route('/ontologies/<path:name>')
+@APP.route('/ontologies/<path:name>')
 def read(name):
     data = robot.read_skill(name)
     return render_template('semantics/skill_info.html', skill=name, result=data)
 
-@app.route('/ontologies/query', methods=('GET', 'POST'))
+@APP.route('/ontologies/query', methods=('GET', 'POST'))
 def sparql():
     if request.method == 'POST':
         query = request.form['query']
@@ -52,7 +52,7 @@ def sparql():
 TESTING THE SPEECH INTERFACE
 '''
 
-@app.route('/convo/')
+@APP.route('/convo/')
 def render_conversation():
     return render_template('nlp/conversation.html')
 
@@ -63,7 +63,7 @@ def render_conversation():
 VISUALIZING THE CAMERA FEEDBACK
 '''
 
-@app.route('/camera/')
+@APP.route('/camera/')
 def camera():
     return render_template('video/camera.html')
 
@@ -74,7 +74,7 @@ def camera():
 PLANNING SCENE
 '''
 
-@app.route('/plan')
+@APP.route('/plan')
 def plan():
     return render_template('planning/plan.html')
 
@@ -84,17 +84,17 @@ def plan():
 '''
 VIRTUAL ASSEMBLER
 '''
-@app.route('/assembler')
+@APP.route('/assembler')
 def assembler():
     return render_template('virtual_assembler/dashboard.html')
 
-@app.route('/threejs')
+@APP.route('/threejs')
 def threejs():
     return render_template('virtual_assembler/robot.html')
 
 ################################################################################
 
-@app.route('/new_assembly', methods = ['POST'])
+@APP.route('/new_assembly', methods = ['POST'])
 def learn_new_skill():
     reasoner = Knowledge()
     req_data = request.get_json()
@@ -107,12 +107,12 @@ def learn_new_skill():
 
 ################################################################################
 
-app.add_url_rule('/', endpoint='index')
+APP.add_url_rule('/', endpoint='index')
 
 if __name__ == '__main__':
 
     PARSER = argparse.ArgumentParser(
-        description="Panda TUNI webapp")
+        description="Panda TUNI webAPP")
 
     PARSER.add_argument('--debug', action='store_true',
                         help="Use flask debug/dev mode with file change reloading")
