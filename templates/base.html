@@ -29,7 +29,6 @@
 <body id="page-top">
 
   <script src={{ url_for('static', filename='vendor/jquery/jquery.min.js') }}></script>
-  <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
   <script type=text/javascript>
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
@@ -39,6 +38,7 @@
   {% block content %}{% endblock %}
 
   <!-- Bootstrap core JavaScript-->
+  <script src={{ url_for('static', filename='vendor/bootstrap/js/roslib.min.js') }}></script>
   <script src={{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}></script>
   <script src={{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}></script>
   <script src={{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}></script>
@@ -46,8 +46,6 @@
   <script src={{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.js') }}></script>
   <script src={{ url_for('static', filename='js/sb-admin.min.js') }}></script>
   <script src={{ url_for('static', filename='js/ros.js') }}></script>
-  <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-  <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
 
 
