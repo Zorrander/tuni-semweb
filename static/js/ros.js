@@ -13,10 +13,10 @@ var listeners = [];
 //});
 
 
-function connectToROS(webserver_url){
+function connectToROS(webserverUrl){
   console.log("Trying to connect...")
   ros = new ROSLIB.Ros({
-    url : webserver_url
+    url : webserverUrl
   });
 }
 
