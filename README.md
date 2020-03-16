@@ -1,5 +1,7 @@
 # Semantics teaching interface
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3f5a9981159d4054a6843e63b7ec144f)](https://app.codacy.com/manual/alexandre.angleraud/tuni-semweb?utm_source=github.com&utm_medium=referral&utm_content=Zorrander/tuni-semweb&utm_campaign=Badge_Grade_Dashboard)
+
 Interface composed of:
 * A virtual assembler to teach the semantics of an assembly task.
 * A planning scene allowing to visualize a suggested action sequence.
