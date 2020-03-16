@@ -29,7 +29,6 @@
 <body id="page-top">
 
   <script src={{ url_for('static', filename='vendor/jquery/jquery.min.js') }}></script>
-  <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
   <script type=text/javascript>
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
@@ -44,10 +43,9 @@
   <script src={{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}></script>
   <script src={{ url_for('static', filename='vendor/datatables/jquery.dataTables.js') }}></script>
   <script src={{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.js') }}></script>
+  <script src={{ url_for('static', filename='js/roslib.min.js') }}></script>
   <script src={{ url_for('static', filename='js/sb-admin.min.js') }}></script>
   <script src={{ url_for('static', filename='js/ros.js') }}></script>
-  <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-  <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
 
 
