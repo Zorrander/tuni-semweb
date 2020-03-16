@@ -1,5 +1,5 @@
 var ros;
-var speech_topic ;
+var speechTopic ;
 var listeners = [];
 
 
@@ -61,7 +61,7 @@ function connected_callback(){
       updateIndicator();
   });
 
-  speech_topic = new ROSLIB.Topic({
+  speechTopic = new ROSLIB.Topic({
       ros : ros,
       name : '/speech_output',
       messageType : 'std_msgs/String'
