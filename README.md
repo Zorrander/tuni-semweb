@@ -1,4 +1,5 @@
 # Semantics teaching interface
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/11b35e03ebd24e618151130aa435978a)](https://www.codacy.com/manual/alexandre.angleraud/tuni-semweb?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Zorrander/tuni-semweb&amp;utm_campaign=Badge_Grade)
 
 Interface composed of:
 * A virtual assembler to teach the semantics of an assembly task.
