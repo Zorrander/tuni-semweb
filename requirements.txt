@@ -1,4 +1,3 @@
 Flask
 gunicorn
-jena_sempy
 requests[security]
