@@ -8,23 +8,25 @@ import json
 from flask import Flask, Blueprint, render_template, jsonify, request, send_from_directory
 
 
-APP = Flask(__name__)
+APP = Flask(__name__, static_folder='static')
 
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), '/static/models')
-
-print("Upload folder: " + UPLOAD_FOLDER)
-APP.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+#UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), '/static/models')
+#print("Upload folder: " + UPLOAD_FOLDER)
+#APP.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 '''
 INDEX PAGE
 '''
 @APP.route('/')
 def index():
-    return render_template('index.html')
+    return "Hello world"
 
-@APP.route('/uploads/<path:filename>', methods=['GET', 'POST'])
-def download(filename):
-    return send_from_directory(directory=UPLOAD_FOLDER, filename=filename)
+@APP.route('/uploads/<path:filename>')
+def download_file(filename):
+    try:
+        return send_from_directory(APP.static_folder, filename, as_attachment=True)
+    except FileNotFoundError:
+        abort(404)
 ################################################################################
 
 '''
