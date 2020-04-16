@@ -4,7 +4,7 @@ import os
 import sys
 import argparse
 import json
-from jena_reasoning.owl import Knowledge
+#from jena_reasoning.owl import Knowledge
 from flask import Flask, Blueprint, render_template, jsonify, request
 
 
