@@ -22,7 +22,7 @@ INDEX PAGE
 def index():
     return render_template('index.html')
 
-@app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
+@APP.route('/uploads/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
     return send_from_directory(directory=UPLOAD_FOLDER, filename=filename)
 ################################################################################
