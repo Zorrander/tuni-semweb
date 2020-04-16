@@ -29,7 +29,7 @@ def download(filename):
 
 '''
 ADD KNOWLEDGE
-'''
+
 
 @APP.route('/ontologies')
 def knowledge_base():
@@ -48,45 +48,45 @@ def sparql():
         print (data)
         return render_template('semantics/query.html', query_result=data)
     return render_template('semantics/query.html')
-
+'''
 ################################################################################
 
 '''
 TESTING THE SPEECH INTERFACE
-'''
+
 
 @APP.route('/convo/')
 def render_conversation():
     return render_template('nlp/conversation.html')
-
+'''
 ################################################################################
 
 
 '''
 VISUALIZING THE CAMERA FEEDBACK
-'''
+
 
 @APP.route('/camera/')
 def camera():
     return render_template('video/camera.html')
-
+'''
 ################################################################################
 
 
 '''
 PLANNING SCENE
-'''
+
 
 @APP.route('/plan')
 def plan():
     return render_template('planning/plan.html')
-
+'''
 ################################################################################
 
 
 '''
 VIRTUAL ASSEMBLER
-'''
+
 @APP.route('/assembler')
 def assembler():
     return render_template('virtual_assembler/dashboard.html')
@@ -107,7 +107,7 @@ def learn_new_skill():
     print("Object : {} ".format(req_data), file=sys.stderr)
     #reasoner.add_object(req_data)
     return jsonify(req_data)
-
+'''
 ################################################################################
 
 APP.add_url_rule('/', endpoint='index')
