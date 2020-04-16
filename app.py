@@ -5,7 +5,7 @@ import sys
 import argparse
 import json
 #from jena_reasoning.owl import Knowledge
-from flask import Flask, Blueprint, render_template, jsonify, request
+from flask import Flask, Blueprint, render_template, jsonify, request, send_from_directory
 
 
 APP = Flask(__name__)
