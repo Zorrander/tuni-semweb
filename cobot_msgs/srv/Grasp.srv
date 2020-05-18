@@ -1,0 +1,4 @@
+float64 width # [m]
+float64 force # [N]
+---
+bool success

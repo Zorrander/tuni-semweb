@@ -1,0 +1,5 @@
+-
+  ros1_package_name: 'cobot_controllers'
+  ros1_service_name: 'NamedTarget'
+  ros2_package_name: 'cobot_msgs'
+  ros2_service_name: 'NamedTarget'

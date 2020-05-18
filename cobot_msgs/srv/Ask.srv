@@ -1,0 +1,3 @@
+cobot_msgs/Triple triple
+---
+bool veracity

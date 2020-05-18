@@ -1,0 +1,3 @@
+cobot_msgs/Triple where
+---
+cobot_msgs/Triple[] rdf_description
