@@ -1,8 +1,11 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include "include/cobot_behavior/command.hpp"
+#include <QObject>
+#include <QString>
+#include <iostream>
+
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
+
+#include "include/cobot_behavior/skill.hpp"
 using std::placeholders::_1;
 
 class MinimalSubscriber : public rclcpp::Node
@@ -25,27 +28,25 @@ class MinimalSubscriber : public rclcpp::Node
 };
 
 
-int main(int argc, char *argv[])
+Skill::Skill(QObject *parent) :
+    QObject(parent)
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-    QGuiApplication app(argc, argv);
-
-    QQmlApplicationEngine engine;
-
-    qmlRegisterType<Command>("CobotCommand",1, 0, "Command");
-
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    if (engine.rootObjects().isEmpty())
-        return -1;
-
-    rclcpp::init(argc, argv);
-    auto node = std::make_shared<MinimalSubscriber>() ;
-
-    while (rclcpp::ok())
-    {
-        rclcpp::spin_some(node);
-        app.processEvents();
-    }
-
 }
+
+QString Skill::action()
+{
+    return m_action;
+}
+
+void Skill::setAction(const QString &value)
+{
+    if (value != m_action) {
+       m_action = value;
+       emit actionChanged();
+    }
+}
+
+void Skill::send(const QString value){
+    std::cout << "Hello world: " << value.toUtf8().constData();
+}
+

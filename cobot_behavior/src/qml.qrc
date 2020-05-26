@@ -4,16 +4,7 @@
         <file>HomeForm.ui.qml</file>
         <file>Page1Form.ui.qml</file>
         <file>Page2Form.ui.qml</file>
-        <file>qtquickcontrols2.conf</file>
         <file>interaction.js</file>
-        <file>3rdparty/gl-matrix.js</file>
-        <file>3rdparty/ThreeJSLoader.js</file>
-        <file>qml/barrel.json</file>
-        <file>qml/barrel.jpg</file>
-        <file>qml/plate.gltf</file>
-        <file>qml/peg.gltf</file>
-        <file>qml/square_peg.json</file>
-        <file>3rdparty/OrbitControls.js</file>
-        <file>3rdparty/three.js</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

@@ -3,6 +3,7 @@
 #include "include/cobot_behavior/command.hpp"
 #include <iostream>
 
+
 Command::Command(QObject *parent) :
     QObject(parent)
 {

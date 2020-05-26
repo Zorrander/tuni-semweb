@@ -33,12 +33,16 @@ include_directories(
  )
 
 set(SOURCE_FILES
+     "src/skill.cpp"
      "src/command.cpp"
+     "src/control.cpp"
      "src/main.cpp"
  )
 
 set(HEADER_FILES
   "include/cobot_behavior/command.hpp"
+  "include/cobot_behavior/skill.hpp"
+  "include/cobot_behavior/control.hpp"
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} "src/qml.qrc" ${HEADER_FILES})
