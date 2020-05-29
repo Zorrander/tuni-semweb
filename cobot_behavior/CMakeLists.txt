@@ -22,12 +22,14 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rmw_implementation REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(cobot_msgs REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Quick REQUIRED)
 
 include_directories(
      ${rclcpp_INCLUDE_DIRS}
      ${std_msgs_INCLUDE_DIRS}
+     ${cobot_msgs_INCLUDE_DIRS}
      ${Qt5Core_INCLUDE_DIRS}
      ${Qt5Quick_INCLUDE_DIRS}
  )
@@ -52,6 +54,7 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES} "src/qml.qrc" ${HEADER_FILES})
 ament_target_dependencies(${PROJECT_NAME}
  rclcpp
  std_msgs
+ cobot_msgs
  rmw_implementation
  )
 

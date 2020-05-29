@@ -50,12 +50,12 @@ Page {
         target: button
         onClicked: {
             print("clicked")
-            command.send(textField.text)
+            command.send(action_box.text, target_box.text)
         }
     }
 
     TextField {
-        id: textField
+        id: action_box
         text: command.action
         placeholderText: qsTr("Action")
         onTextChanged: command.action = text
@@ -64,11 +64,12 @@ Page {
     }
 
     TextField {
-        id: textField1
+        id: target_box
         x: 220
         y: 343
-        text: "#command.action#"
-        placeholderText: qsTr("Action")
+        text: command.targets
+        onTextChanged: command.targets = text
+        placeholderText: qsTr("Targets")
     }
 
     Rectangle {
@@ -81,13 +82,11 @@ Page {
     }
 
     TextField {
-        id: textField2
+        id: dialog_box
         x: 31
         y: 63
         width: 535
         height: 130
-        text: command.action
-        placeholderText: qsTr("Action")
     }
 
     Label {
