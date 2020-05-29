@@ -39,7 +39,7 @@ ApplicationWindow {
             anchors.fill: parent
 
             ItemDelegate {
-                text: qsTr("Page 1")
+                text: qsTr("Speech Interface")
                 width: parent.width
                 onClicked: {
                     stackView.push("Page1Form.ui.qml")
@@ -47,10 +47,28 @@ ApplicationWindow {
                 }
             }
             ItemDelegate {
-                text: qsTr("Page 2")
+                text: qsTr("Operating Franka")
                 width: parent.width
                 onClicked: {
                     stackView.push("Page2Form.ui.qml")
+                    drawer.close()
+                }
+            }
+
+            ItemDelegate {
+                text: qsTr("Skill Creator")
+                width: parent.width
+                onClicked: {
+                    stackView.push("Page3Form.ui.qml")
+                    drawer.close()
+                }
+            }
+
+            ItemDelegate {
+                text: qsTr("Set up benchmark")
+                width: parent.width
+                onClicked: {
+                    stackView.push("Page4Form.ui.qml")
                     drawer.close()
                 }
             }
