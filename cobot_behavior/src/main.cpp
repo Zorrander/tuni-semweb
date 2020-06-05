@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "include/cobot_behavior/command.hpp"
+#include "include/cobot_behavior/knowledge.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 using std::placeholders::_1;
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     qmlRegisterType<Command>("CobotCommand",1, 0, "Command");
+    qmlRegisterType<Knowledge>("CobotKnowledge",1, 0, "Knowledge");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

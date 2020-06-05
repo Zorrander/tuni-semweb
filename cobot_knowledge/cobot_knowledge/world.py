@@ -1,22 +1,29 @@
 import rclpy
+from ament_index_python.packages import get_package_share_directory
 from rclpy.node import Node
 from pathlib import Path
 from cobowl.world import DigitalWorld
-from cobot_msgs.srv import Select, Describe, Ask, Update, CreateInstance, GenerateInstanceName
+from cobot_msgs.srv import Select, Describe, Ask, Update, CreateInstance, GenerateInstanceName, Export
 
-class RosPlanner(Node):
+RESOURCE_PATH = get_package_share_directory('cobot_knowledge')
+
+class RosKnowledge(Node):
 
     def __init__(self):
         super().__init__('world')
-        self.world = DigitalWorld()
+        self.world = DigitalWorld(base=str(Path(RESOURCE_PATH)/'handover.owl'))
 
         self.add_data_srv = self.create_service(Ask, 'add_data', self.add_data)
-        self.remove_data_srv = self.create_service(Ask, 'remove_data', self.remove_data)
-        self.select_data_srv = self.create_service(Describe, 'read_data', self.select_data)
-        self.read_data_srv = self.create_service(Select, 'select_data', self.read_data)
-        self.test_data_srv = self.create_service(Update, 'test_data', self.test_data)
+        self.test_data_srv = self.create_service(Update,'test_data', self.test_data)
+        self.read_data_srv = self.create_service( Select, 'select_data',self.read_data)
+        self.remove_data_srv = self.create_service(Ask,     'remove_data',self.remove_data)
+        self.select_data_srv = self.create_service( Describe,  'read_data', self.select_data)
+
+
         self.create_instance_srv = self.create_service(CreateInstance, 'create_instance', self.create_instance)
         self.generate_instance_uri_srv = self.create_service(GenerateInstanceName, 'generate_instance_uri', self.generate_instance_uri)
+
+        self.export_srv = self.create_service(Export, 'export_onto', self.export)
 
     def add_data(self, request, response):
         trpl = request.update_triple
@@ -48,6 +55,12 @@ class RosPlanner(Node):
 
     def generate_instance_uri(self, request, response):
         pass
+
+    def export(self, request, response):
+        self.world.onto.save(file = request.filename, format = "rdfxml")
+        response.success = True
+        response.message = "Ontology saved"
+        return(response)
 
     def add_object(self, name):
         self.world.add_objects(name)
@@ -95,7 +108,7 @@ class RosPlanner(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    node = RosPlanner()
+    node = RosKnowledge()
 
     rclpy.spin(node)
 

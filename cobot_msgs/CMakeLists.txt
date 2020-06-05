@@ -37,6 +37,7 @@ ament_export_dependencies(rosidl_default_runtime)
 
 set(msg_files
   "msg/Command.msg"
+  "msg/Triple.msg"
 )
 
 set(srv_files
@@ -46,6 +47,14 @@ set(srv_files
   "srv/ReachCartesianPose.srv"
   "srv/ReachJointPose.srv"
   "srv/RobotSpeed.srv"
+
+  "srv/Export.srv"
+  "srv/Ask.srv"
+  "srv/CreateInstance.srv"
+  "srv/Describe.srv"
+  "srv/GenerateInstanceName.srv"
+  "srv/Select.srv"
+  "srv/Update.srv"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}

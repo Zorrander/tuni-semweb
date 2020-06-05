@@ -1,0 +1,1479 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://onto-server-tuni.herokuapp.com/Panda#"
+     xml:base="http://onto-server-tuni.herokuapp.com/Panda"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:Panda="http://onto-server-tuni/Panda#"
+     xmlns:cogrob="http://onto-server-tuni.herokuapp.com/Panda#"
+     xmlns:annotation="http://purl.org/ieee1872-owl/annotation#">
+    <owl:Ontology rdf:about="http://onto-server-tuni/Panda">
+        <owl:imports rdf:resource="http://purl.org/ieee1872-owl/cora"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://onto-server-tuni/Panda#fuzzyLabel -->
+
+    <owl:AnnotationProperty rdf:about="http://onto-server-tuni/Panda#fuzzyLabel"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#python_module -->
+
+    <owl:AnnotationProperty rdf:about="http://onto-server-tuni/Panda#python_module"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://onto-server-tuni/Panda#actsOn -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#actsOn">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Task"/>
+        <rdfs:range rdf:resource="http://onto-server-tuni/Panda#Object"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#contains -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#contains">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Object"/>
+        <rdfs:range rdf:resource="http://onto-server-tuni/Panda#Object"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#hasAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#hasAttribute">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Feature"/>
+        <rdfs:range rdf:resource="http://onto-server-tuni/Panda#Attribute"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#hasCondition -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#hasCondition">
+        <rdfs:range rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#hasEffect -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#hasEffect">
+        <rdfs:range rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#hasMethod -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#hasMethod">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Task"/>
+        <rdfs:range rdf:resource="http://onto-server-tuni/Panda#Method"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#hasSubtask -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#hasSubtask">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:range rdf:resource="http://onto-server-tuni/Panda#Task"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#has_feature -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#has_feature">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Object"/>
+        <rdfs:range rdf:resource="http://onto-server-tuni/Panda#Feature"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#has_path_goal -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#has_path_goal"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#has_place_goal -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#has_place_goal">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Task"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#useOperator -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#useOperator">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#PrimitiveTask"/>
+        <rdfs:range rdf:resource="http://onto-server-tuni/Panda#Operator"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://onto-server-tuni/Panda#hasPriority -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#hasPriority">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#has_action -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#has_action">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Command"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#has_target -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#has_target">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Command"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#has_value -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#has_value">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#isCapableOfReaching -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#isCapableOfReaching">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#isHoldingSomething -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#isHoldingSomething">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Actor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#isMet -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#isMet">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#isReadyToBeTaken -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#isReadyToBeTaken">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#isWaitingForSomething -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#isWaitingForSomething">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#isWorkspaceEmpty -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#isWorkspaceEmpty">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#is_aligned -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#is_aligned"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#is_called -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#is_called">
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Object"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Actor -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Actor"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#AligningTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#AligningTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PositioningTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasEffect"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsAligned"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#ArmOperator -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#ArmOperator">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Operator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#AssemblyMethod -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#AssemblyMethod">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#InsertTask"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#PickTask"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasPriority"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#AssemblyTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#AssemblyTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#AssemblyMethod"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Attribute -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Attribute"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Be -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Be">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#CommandMethod"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IdleMethod"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Big -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Big">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Size"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Black -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Black">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Color"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Blue -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Blue">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Color"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Boundaries -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Boundaries">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Box -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Box">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Entity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Category -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Category">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#CloseOperator -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#CloseOperator">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#GripperOperator"/>
+        <owl:disjointWith rdf:resource="http://onto-server-tuni/Panda#OpenOperator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Color -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Color">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Attribute"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Command -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Command"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#CommandMethod -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#CommandMethod">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#ReceivedCommand"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasPriority"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#CompoundTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#CompoundTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Task"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Container -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Container">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#has_feature"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#HollowSpace"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Category"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Empty -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Empty">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#contains"/>
+                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:maxCardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Entity -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Entity">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Faceplate -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Faceplate">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Entity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Feature -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Feature"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#From -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#From">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Path"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Full -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Full">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#GraspTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#GraspTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PrimitiveTask"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsCapableOfReaching"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsNotHoldingSomething"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasEffect"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsHoldingSomething"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#useOperator"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#CloseOperator"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#GripperOperator -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#GripperOperator">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Operator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#HandoverMethod -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#HandoverMethod">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#PickTask"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#PositioningTask"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#WaitForTask"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasPriority"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#HandoverTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#HandoverTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#HandoverMethod"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Head -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Head">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Feature"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasAttribute"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#Shape"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasAttribute"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#Size"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Heavy -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Heavy">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Weight"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Hole -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Hole">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Feature"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasAttribute"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#Shape"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasAttribute"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#Size"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#HollowSpace -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#HollowSpace">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#HumanAgent -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#HumanAgent">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Actor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IdleMethod -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IdleMethod">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IdleTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasPriority"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">99</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IdleOperator -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IdleOperator">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#ArmOperator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IdleTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IdleTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PrimitiveTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#useOperator"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IdleOperator"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#InsertMethod -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#InsertMethod">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#AligningTask"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#InsertingTask"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasPriority"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#InsertTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#InsertTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#InsertMethod"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#InsertingTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#InsertingTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PositioningTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsAligned"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Inside -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Inside">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PlaceFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#has_place_goal"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#Container"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsAligned -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsAligned">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsCapableOfReaching -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsCapableOfReaching">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsHoldingSomething -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsHoldingSomething">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsNotCapableOfReaching -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsNotCapableOfReaching">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsNotHoldingSomething -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsNotHoldingSomething">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsNotOnTheWorspace -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsNotOnTheWorspace">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsNotReadyToBeTaken -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsNotReadyToBeTaken">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsOnTheWorkspace -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsOnTheWorkspace">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsReadyToBeTaken -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsReadyToBeTaken">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#IsWaitingForSomething -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#IsWaitingForSomething">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Light -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Light">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Weight"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Method -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Method"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#MoveOperator -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#MoveOperator">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#ArmOperator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Object -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Object"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#On -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#On">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PlaceFunction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#OpenOperator -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#OpenOperator">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#GripperOperator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Operator -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Operator"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#OrientingTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#OrientingTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PrimitiveTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsHoldingSomething"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#useOperator"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#MoveOperator"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PackingMethod -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PackingMethod">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#PickTask"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#PlaceTask"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#has_place_goal"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#Inside"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasPriority"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PackingTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PackingTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#PackingMethod"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Path -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Path"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Peg -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Peg">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Entity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Pendulum -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Pendulum">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Entity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PendulumHead -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PendulumHead">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Entity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PhysicalPlace -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PhysicalPlace">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#SpatialPlace"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PickMethod -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PickMethod">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#GraspTask"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#ReachTask"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasPriority"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PickTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PickTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#PickMethod"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PlaceFunction -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PlaceFunction">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#SpatialPlace"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PlaceMethod -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PlaceMethod">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#ReleaseTask"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasSubtask"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#TranslationTask"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#has_path_goal"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#To"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasPriority"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PlaceTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PlaceTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#PlaceMethod"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PositioningTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PositioningTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PrimitiveTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsHoldingSomething"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#useOperator"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#MoveOperator"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#PrimitiveTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PrimitiveTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Task"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Profile -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Profile">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#ReachTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#ReachTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PrimitiveTask"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsNotCapableOfReaching"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
+                        <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsNotHoldingSomething"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasEffect"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsCapableOfReaching"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#useOperator"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#MoveOperator"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#ReceivedCommand -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#ReceivedCommand">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Rectangular -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Rectangular">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Shape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Red -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Red">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Color"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#ReleaseTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#ReleaseTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PrimitiveTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsHoldingSomething"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasEffect"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsNotHoldingSomething"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#useOperator"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#OpenOperator"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Robot -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Robot">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Actor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Round -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Round">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Shape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Separator -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Separator">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Entity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Shape -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Shape">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Attribute"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Size -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Size">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Attribute"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#SlidingTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#SlidingTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PositioningTask"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Small -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Small">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Size"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#SpatialPlace -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#SpatialPlace"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#State -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#State"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Task -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Task"/>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#To -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#To">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Path"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#has_place_goal"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#SpatialPlace"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Toward -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Toward">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Path"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#TranslationTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#TranslationTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PositioningTask"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#UnpackingMethod -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#UnpackingMethod">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Method"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#Empty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasPriority"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#WaitForTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#WaitForTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PrimitiveTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasEffect"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsWaitingForSomething"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#useOperator"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IdleOperator"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Weight -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Weight">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Attribute"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Workspace -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Workspace">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Entity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Yellow -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Yellow">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Color"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://onto-server-tuni/Panda#be -->
+
+    <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#be">
+        <rdf:type rdf:resource="http://onto-server-tuni/Panda#Be"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#cobot_workspace -->
+
+    <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#cobot_workspace">
+        <rdf:type rdf:resource="http://onto-server-tuni/Panda#Workspace"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#panda -->
+
+    <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#panda">
+        <rdf:type rdf:resource="http://onto-server-tuni/Panda#Robot"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://onto-server-tuni/Panda#GraspTask"/>
+            <rdf:Description rdf:about="http://onto-server-tuni/Panda#PositioningTask"/>
+            <rdf:Description rdf:about="http://onto-server-tuni/Panda#ReleaseTask"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
