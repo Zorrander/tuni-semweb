@@ -42,10 +42,12 @@ set(SOURCE_FILES
      "src/tasksmodel.cpp"
      "src/methodsmodel.cpp"
      "src/main.cpp"
+     "src/taskslist.cpp"
  )
 
 set(HEADER_FILES
   "include/cobot_behavior/command.hpp"
+  "include/cobot_behavior/taskslist.hpp"
   "include/cobot_behavior/skill.hpp"
   "include/cobot_behavior/control.hpp"
   "include/cobot_behavior/knowledge.hpp"

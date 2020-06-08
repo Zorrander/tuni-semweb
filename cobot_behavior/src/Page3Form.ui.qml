@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import CobotKnowledge 1.0
+import Tasks 1.0
 
 Page {
     id: page
@@ -105,11 +106,13 @@ Page {
         y: 271
         width: 199
         height: 287
-        model: knowledge.tasks
+        model: Tasks {
+            list: tasksList
+        }
         delegate: Row {
             width: parent.width
             TextField {
-                text: display
+                text: model.description
             }
         }
     }

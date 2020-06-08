@@ -2,6 +2,9 @@
 #include <QQmlApplicationEngine>
 #include "include/cobot_behavior/command.hpp"
 #include "include/cobot_behavior/knowledge.hpp"
+#include "include/cobot_behavior/tasksmodel.hpp"
+#include "include/cobot_behavior/taskslist.hpp"
+#include <QQmlContext>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 using std::placeholders::_1;
@@ -36,6 +39,12 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<Command>("CobotCommand",1, 0, "Command");
     qmlRegisterType<Knowledge>("CobotKnowledge",1, 0, "Knowledge");
+    qmlRegisterType<TasksModel>("Tasks",1, 0, "Tasks");
+
+    qmlRegisterUncreatableType<TasksList>("TasksList", 1, 0, "TasksList", QStringLiteral("TasksList should not be created in QML"));
+    TasksList tasksList;
+    engine.rootContext()->setContextProperty(QStringLiteral("tasksList"), &tasksList);
+
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

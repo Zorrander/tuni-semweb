@@ -105,3 +105,4 @@ venv.bak/
 
 #Qt
 *.user*
+build-cobot*
