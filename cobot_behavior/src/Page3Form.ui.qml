@@ -34,17 +34,17 @@ Page {
 
     TextField {
         id: name_file
-        x: 233
-        y: 517
+        x: 336
+        y: 518
         text: knowledge.filename
         placeholderText: "Enter a file name"
     }
 
     Button {
         id: button
-        x: 450
-        y: 500
-        width: 144
+        x: 573
+        y: 501
+        width: 178
         height: 73
         text: qsTr("Export")
     }
@@ -67,8 +67,8 @@ Page {
 
     RoundButton {
         id: roundButton
-        x: 86
-        y: 231
+        x: 403
+        y: 352
         width: 66
         height: 69
         text: "+"
@@ -76,10 +76,10 @@ Page {
 
     Row {
         id: row
-        x: 292
+        x: 296
         y: 163
         width: 279
-        height: 287
+        height: 183
 
         Label {
             id: label3
@@ -87,6 +87,30 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
             color: "#8f8f9f"
+        }
+    }
+
+    Label {
+        id: label2
+        x: 45
+        y: 233
+        text: qsTr("Existing tasks")
+        font.pointSize: 12
+        font.family: "Ubuntu"
+    }
+
+    ListView {
+        id: listView
+        x: 45
+        y: 271
+        width: 199
+        height: 287
+        model: knowledge.tasks
+        delegate: Row {
+            width: parent.width
+            TextField {
+                text: display
+            }
         }
     }
 }

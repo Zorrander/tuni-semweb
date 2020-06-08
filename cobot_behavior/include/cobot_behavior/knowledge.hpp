@@ -3,7 +3,8 @@
 
 #include <QObject>
 #include <QString>
-
+#include <QStringListModel>
+#include <string>
 #include "rclcpp/rclcpp.hpp"
 #include "cobot_msgs/srv/export.hpp"
 
@@ -11,11 +12,13 @@ class Knowledge : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString filename READ filename WRITE setFilename NOTIFY filenameChanged)
+    Q_PROPERTY(QStringListModel *tasks READ tasks)
 
 public:
     explicit Knowledge(QObject *parent = nullptr);
     QString filename() ;
     void setFilename(const QString &value);
+    QStringListModel *tasks();
 
 signals:
     void filenameChanged();
@@ -25,8 +28,8 @@ public slots:
 
 private:
     std::shared_ptr<rclcpp::Node> node ;
-    QString m_filename;
     rclcpp::Client<cobot_msgs::srv::Export>::SharedPtr client;
+    QString m_filename;
 };
 
 

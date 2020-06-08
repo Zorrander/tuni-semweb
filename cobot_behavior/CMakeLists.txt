@@ -39,6 +39,8 @@ set(SOURCE_FILES
      "src/command.cpp"
      "src/control.cpp"
      "src/knowledge.cpp"
+     "src/tasksmodel.cpp"
+     "src/methodsmodel.cpp"
      "src/main.cpp"
  )
 
@@ -47,6 +49,8 @@ set(HEADER_FILES
   "include/cobot_behavior/skill.hpp"
   "include/cobot_behavior/control.hpp"
   "include/cobot_behavior/knowledge.hpp"
+  "include/cobot_behavior/methodsmodel.hpp"
+  "include/cobot_behavior/tasksmodel.hpp"
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} "src/qml.qrc" ${HEADER_FILES})

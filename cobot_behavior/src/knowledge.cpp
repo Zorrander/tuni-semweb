@@ -1,6 +1,5 @@
 #include <QObject>
 #include <QString>
-
 #include <iostream>
 
 #include "include/cobot_behavior/knowledge.hpp"
@@ -21,6 +20,14 @@ QString Knowledge::filename()
     return m_filename;
 }
 
+QStringListModel *Knowledge::tasks()
+{
+    QStringListModel *model = new QStringListModel;
+    QStringList list;
+    list << "test" << "test2" << "test3";
+    model->setStringList(list);
+    return model;
+}
 
 
 void Knowledge::setFilename(const QString &value)
