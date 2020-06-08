@@ -3,7 +3,8 @@ from ament_index_python.packages import get_package_share_directory
 from rclpy.node import Node
 from pathlib import Path
 from cobowl.world import DigitalWorld
-from cobot_msgs.srv import Select, Describe, Ask, Update, CreateInstance, GenerateInstanceName, Export
+from cobot_msgs.msg import Task, Method
+from cobot_msgs.srv import Select, Describe, Ask, Update, CreateInstance, GenerateInstanceName, Export, ReadTasks, ReadMethods
 
 RESOURCE_PATH = get_package_share_directory('cobot_knowledge')
 
@@ -19,11 +20,29 @@ class RosKnowledge(Node):
         self.remove_data_srv = self.create_service(Ask,     'remove_data',self.remove_data)
         self.select_data_srv = self.create_service( Describe,  'read_data', self.select_data)
 
+        self.read_tasks = self.create_service(ReadTasks,     'read_tasks',self.read_tasks)
+        self.read_methods = self.create_service( ReadMethods,  'read_methods', self.read_methods)
 
         self.create_instance_srv = self.create_service(CreateInstance, 'create_instance', self.create_instance)
         self.generate_instance_uri_srv = self.create_service(GenerateInstanceName, 'generate_instance_uri', self.generate_instance_uri)
 
         self.export_srv = self.create_service(Export, 'export_onto', self.export)
+
+
+    def read_tasks(self, request, response):
+        tasks = self.world.onto.search(is_a = self.world.onto.Task)
+        print(tasks)
+        response.tasks = list()
+        for x in tasks:
+            task = Task()
+            task.name = x.name
+            response.tasks.append(task)
+        return response
+
+    def read_methods(self, request, response):
+        methods = self.world.onto.search(is_a = self.world.onto.Method)
+        response.methods = [Method(x.name) for x in methods]
+        return response
 
     def add_data(self, request, response):
         trpl = request.update_triple
@@ -37,6 +56,8 @@ class RosKnowledge(Node):
 
     def select_data(self, request, response):
         sel = request.where
+        result = self.world.select_data(sel)
+        print(result)
         response.match = True  # TODO: call owlready
         return response
 

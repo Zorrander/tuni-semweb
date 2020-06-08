@@ -38,6 +38,8 @@ ament_export_dependencies(rosidl_default_runtime)
 set(msg_files
   "msg/Command.msg"
   "msg/Triple.msg"
+  "msg/Method.msg"
+  "msg/Task.msg"
 )
 
 set(srv_files
@@ -55,6 +57,9 @@ set(srv_files
   "srv/GenerateInstanceName.srv"
   "srv/Select.srv"
   "srv/Update.srv"
+
+  "srv/ReadTasks.srv"
+  "srv/ReadMethods.srv"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}

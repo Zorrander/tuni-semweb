@@ -1,6 +1,8 @@
 #ifndef TASKSLIST_HPP
 #define TASKSLIST_HPP
 
+#include "rclcpp/rclcpp.hpp"
+#include "cobot_msgs/srv/read_tasks.hpp"
 #include <QObject>
 #include <QVector>
 
@@ -32,6 +34,8 @@ signals:
 
 private:
     QVector<TaskItem> mItems;
+    std::shared_ptr<rclcpp::Node> node ;
+    rclcpp::Client<cobot_msgs::srv::ReadTasks>::SharedPtr client;
 };
 
 #endif // TASKSLIST_HPP

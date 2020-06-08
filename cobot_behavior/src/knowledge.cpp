@@ -1,12 +1,4 @@
-#include <QObject>
-#include <QString>
-#include <iostream>
-
 #include "include/cobot_behavior/knowledge.hpp"
-
-#include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/string.hpp"
-#include "cobot_msgs/srv/export.hpp"
 
 Knowledge::Knowledge(QObject *parent) :
     QObject(parent)
@@ -18,15 +10,6 @@ Knowledge::Knowledge(QObject *parent) :
 QString Knowledge::filename()
 {
     return m_filename;
-}
-
-QStringListModel *Knowledge::tasks()
-{
-    QStringListModel *model = new QStringListModel;
-    QStringList list;
-    list << "test" << "test2" << "test3";
-    model->setStringList(list);
-    return model;
 }
 
 

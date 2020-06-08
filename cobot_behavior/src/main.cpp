@@ -37,26 +37,28 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    rclcpp::init(argc, argv);
+    // auto node = std::make_shared<MinimalSubscriber>() ;
+
     qmlRegisterType<Command>("CobotCommand",1, 0, "Command");
     qmlRegisterType<Knowledge>("CobotKnowledge",1, 0, "Knowledge");
     qmlRegisterType<TasksModel>("Tasks",1, 0, "Tasks");
 
     qmlRegisterUncreatableType<TasksList>("TasksList", 1, 0, "TasksList", QStringLiteral("TasksList should not be created in QML"));
-    TasksList tasksList;
-    engine.rootContext()->setContextProperty(QStringLiteral("tasksList"), &tasksList);
-
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
 
-    rclcpp::init(argc, argv);
-    auto node = std::make_shared<MinimalSubscriber>() ;
+    TasksList tasksList;
+    engine.rootContext()->setContextProperty(QStringLiteral("tasksList"), &tasksList);
 
-    while (rclcpp::ok())
-    {
-        rclcpp::spin_some(node);
-        app.processEvents();
-    }
+    app.processEvents();
+    //while (rclcpp::ok())
+    //{
+        //std::cout << "Test";
+        //rclcpp::spin_some(node);
+
+    //}
 
 }

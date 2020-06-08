@@ -40,7 +40,6 @@ set(SOURCE_FILES
      "src/control.cpp"
      "src/knowledge.cpp"
      "src/tasksmodel.cpp"
-     "src/methodsmodel.cpp"
      "src/main.cpp"
      "src/taskslist.cpp"
  )
@@ -51,7 +50,6 @@ set(HEADER_FILES
   "include/cobot_behavior/skill.hpp"
   "include/cobot_behavior/control.hpp"
   "include/cobot_behavior/knowledge.hpp"
-  "include/cobot_behavior/methodsmodel.hpp"
   "include/cobot_behavior/tasksmodel.hpp"
 )
 
