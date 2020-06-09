@@ -101,7 +101,7 @@ Page {
     }
 
     ListView {
-        id: listView
+        id: listTasks
         x: 45
         y: 271
         width: 199
@@ -110,11 +110,20 @@ Page {
             list: tasksList
         }
         delegate: Row {
+            property variant myData: model
             width: parent.width
+            height: 40
             TextField {
                 text: model.description
             }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: listTasks.currentIndex = index
+            }
         }
+        onCurrentIndexChanged: console.log(
+                                   listTasks.currentItem.myData.description)
     }
 }
 

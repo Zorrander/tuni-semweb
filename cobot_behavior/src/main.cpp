@@ -53,12 +53,12 @@ int main(int argc, char *argv[])
     TasksList tasksList;
     engine.rootContext()->setContextProperty(QStringLiteral("tasksList"), &tasksList);
 
-    app.processEvents();
-    //while (rclcpp::ok())
-    //{
+
+    while (rclcpp::ok())
+    {
         //std::cout << "Test";
         //rclcpp::spin_some(node);
-
-    //}
+        app.processEvents();
+    }
 
 }
