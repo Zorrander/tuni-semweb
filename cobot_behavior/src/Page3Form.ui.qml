@@ -14,11 +14,24 @@ Page {
         id: knowledge
     }
 
+    Tasks {
+        id: tasks
+    }
+
     Connections {
+
         target: button
         onClicked: {
             print("clicked")
             knowledge.export_ontology(name_file.text)
+        }
+    }
+
+    Connections {
+        target: listTasks
+        onCurrentIndexChanged: {
+            infoBox.open()
+            tasks.fetch(listTasks.currentItem.myData.description)
         }
     }
 
@@ -122,14 +135,13 @@ Page {
                 onClicked: listTasks.currentIndex = index
             }
         }
-        onCurrentIndexChanged: console.log(
-                                   listTasks.currentItem.myData.description)
+    }
+
+    Dialog {
+        id: infoBox
+        Text {
+            id: infotest
+            text: qsTr("Test")
+        }
     }
 }
-
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:0.8999999761581421}
-}
-##^##*/
-

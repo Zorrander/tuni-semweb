@@ -65,3 +65,11 @@ void TasksModel::setList(TasksList *list)
 
     endResetModel();
 }
+
+void TasksModel::fetch(const QString description)
+{
+    //TaskInfoDialog mDialog = new TaskInfoDialog(description.toUtf8().constData()) ;
+    //mdialog.setModal(true);
+    //mDialog.exec();
+    int a = 0;
+}
