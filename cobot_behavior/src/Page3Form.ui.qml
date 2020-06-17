@@ -19,7 +19,6 @@ Page {
     }
 
     Connections {
-
         target: button
         onClicked: {
             print("clicked")
