@@ -70,11 +70,17 @@ class NLP():
             return robot.find_location(object)
     '''
     def process_commands(self, tagged_tokens):
-        action = tagged_tokens[0][0].encode('ascii','ignore')
-        target = None
+        # action = tagged_tokens[0][0].encode('ascii','ignore')
+        action = tagged_tokens[0][0]
+        target = []
+        for tgt, tag in tagged_tokens:
+            if tgt in ["gripper", "peg"]:
+                target.append(tgt)
+        '''
         for word, tag in tagged_tokens:
             if tag == "NN":
                 target = word.encode('ascii','ignore')
+        '''
         return (action, target)
 
     '''

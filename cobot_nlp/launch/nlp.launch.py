@@ -2,9 +2,12 @@ import launch
 import launch.actions
 import launch.substitutions
 import launch_ros.actions
-
+import os
 
 def generate_launch_description():
+    myenv = os.environ
+    myenv["PYTHONUNBUFFERED"] = "1"
+    
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(
             'node_prefix',

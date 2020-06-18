@@ -1,5 +1,7 @@
 import copy
 import rclpy
+from pathlib import Path
+from ament_index_python.packages import get_package_share_directory
 from rclpy.node import Node
 from cobowl.world import DigitalWorld
 from semantic_htn.planner import Planner
@@ -7,11 +9,13 @@ import asyncio
 from cobot_msgs.msg import Command
 from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper
 
+RESOURCE_PATH = get_package_share_directory('cobot_knowledge')
+
 class RosPlanner(Node):
 
     def __init__(self):
         super().__init__('planner')
-        self.world = DigitalWorld()
+        self.world = DigitalWorld(base=str(Path(RESOURCE_PATH)/'handover.owl'))
         self.world.add_object("peg")
         self.world.add_object("box")
         self.world.add_object("separator")

@@ -17,7 +17,11 @@ class Listener(Node):
         test = self.nlp.run(msg.data)
         print("Result processing")
         print(test)
-        self.pub.publish(Command(test))
+        if test:
+            cmd = Command()
+            cmd.action=test[0]
+            cmd.targets = test[1]
+            self.pub.publish(cmd)
 
 
 def main(args=None):

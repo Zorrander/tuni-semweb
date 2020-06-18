@@ -6,9 +6,11 @@ Robot::Robot(QObject *parent) :
     node = rclcpp::Node::make_shared("minimal_client");
     store_pose_client = node->create_client<cobot_msgs::srv::NamedTarget>("store_position");
     move_named_target_client = node->create_client<cobot_msgs::srv::NamedTarget>("move_to");
-
+    grasp_client = node->create_client<cobot_msgs::srv::Grasp>("grasp");
     move_gripper_client = node->create_client<cobot_msgs::srv::MoveGripper>("move_gripper");
-
+    command_publisher = node->create_publisher<std_msgs::msg::String>("command", 10);
+    ee_pose = node->create_subscription<std_msgs::msg::String>(
+    "topic", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
     m_target_list = (QStringList()<<"ready");
 }
 
@@ -20,6 +22,11 @@ QString Robot::targetname()
 QStringList Robot::targetlist()
 {
     return m_target_list;
+}
+
+QList<qreal> Robot::ee_pose()
+{
+    return m_ee_pose;
 }
 
 void Robot::setTargetname(const QString &value)
@@ -62,12 +69,31 @@ void Robot::close_gripper()
     rclcpp::spin_some(node);
 }
 
-void Robot::routine()
+void Robot::grasp1()
 {
-    for (size_t var = 0; var < 10; ++var) {
-        this->close_gripper();
-        this->open_gripper();
-    }
+    auto request = std::make_shared<cobot_msgs::srv::Grasp::Request>();
+    request->width = 0.01;
+    request->force = 50.0;
+    auto result = grasp_client->async_send_request(request);
+    rclcpp::spin_some(node);
+}
+
+void Robot::routine(const QString value)
+{
+    auto message = std_msgs::msg::String();
+    message.data = value.toUtf8().constData() ;
+    command_publisher->publish(message);
+    std::cout << "Sent";
+    rclcpp::spin_some(node);
+    // for (size_t var = 0; var < 10; ++var) {
+    //    this->close_gripper();
+    //    this->open_gripper();
+    // }
+}
+
+void Robot::setEe_pose(const QList<qreal> &ee_pose)
+{
+    m_ee_pose = ee_pose;
 }
 
 
