@@ -8,10 +8,11 @@ Robot::Robot(QObject *parent) :
     move_named_target_client = node->create_client<cobot_msgs::srv::NamedTarget>("move_to");
     grasp_client = node->create_client<cobot_msgs::srv::Grasp>("grasp");
     move_gripper_client = node->create_client<cobot_msgs::srv::MoveGripper>("move_gripper");
+    list_targets_client = node->create_client<cobot_msgs::srv::ListTargets>("get_targets");
     command_publisher = node->create_publisher<std_msgs::msg::String>("command", 10);
-    ee_pose = node->create_subscription<std_msgs::msg::String>(
-    "topic", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
-    m_target_list = (QStringList()<<"ready");
+    m_target_list = QStringList();
+    // ee_pose = node->create_subscription<std_msgs::msg::String>(
+    // "topic", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
 }
 
 QString Robot::targetname()
@@ -24,10 +25,12 @@ QStringList Robot::targetlist()
     return m_target_list;
 }
 
+/*
 QList<qreal> Robot::ee_pose()
 {
     return m_ee_pose;
 }
+*/
 
 void Robot::setTargetname(const QString &value)
 {
@@ -44,6 +47,20 @@ void Robot::save(const QString value){
     emit targetlisthanged();
     auto result = store_pose_client->async_send_request(request);
     rclcpp::spin_some(node);
+
+}
+
+void Robot::load_targets()
+{
+    auto request = std::make_shared<cobot_msgs::srv::ListTargets::Request>();
+    auto result = list_targets_client->async_send_request(request);
+    rclcpp::spin_until_future_complete(node, result);
+    std::cout << "yes";
+    for(auto x: result.get()->targets){
+        std::cout << x;
+        m_target_list << QString::fromStdString(x);
+    }
+    emit targetlisthanged();
 }
 
 void Robot::move_target(const QString value)
@@ -91,9 +108,5 @@ void Robot::routine(const QString value)
     // }
 }
 
-void Robot::setEe_pose(const QList<qreal> &ee_pose)
-{
-    m_ee_pose = ee_pose;
-}
 
 

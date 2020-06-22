@@ -48,6 +48,7 @@ set(srv_files
   "srv/NamedTarget.srv"
   "srv/ReachCartesianPose.srv"
   "srv/ReachJointPose.srv"
+  "srv/ListTargets.srv"
   "srv/RobotSpeed.srv"
 
   "srv/Export.srv"

@@ -46,10 +46,18 @@ Page {
     }
 
     Connections {
-        target: grasp1_button
+        target: close_gripper_button
         onClicked: {
             print("close_gripper_button clicked")
-            robot.grasp1()
+            robot.close_gripper()
+        }
+    }
+
+    Connections {
+        target: load_targets_button
+        onClicked: {
+            print("load_targets_button clicked")
+            robot.load_targets()
         }
     }
 
@@ -114,7 +122,7 @@ Page {
 
     Button {
         id: save_button
-        x: 584
+        x: 506
         y: 347
         width: 124
         height: 40
@@ -129,7 +137,7 @@ Page {
 
     Button {
         id: move_target_button
-        x: 584
+        x: 506
         y: 415
         width: 124
         height: 40
@@ -198,11 +206,23 @@ Page {
         model: ["x", "y", "z"]
     }
 
+    Button {
+        id: load_targets_button
+        x: 674
+        y: 347
+        width: 124
+        height: 108
+        text: qsTr("Load targets")
+    }
+
+
+    /*
+
     Slider {
         id: slider
         x: 537
         y: 576
-        value: "0.5"
+        value: 0.5
     }
 
     Slider {
@@ -226,5 +246,5 @@ Page {
         y: 706
         text: qsTr("")
         placeholderText: "Current value"
-    }
+    }*/
 }
