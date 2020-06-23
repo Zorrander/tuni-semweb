@@ -13,42 +13,40 @@ Command::Command(QObject *parent) :
     QObject(parent)
 {
     node = rclcpp::Node::make_shared("minimal_publisher");
-    publisher = node->create_publisher<cobot_msgs::msg::Command>("plan_request", 10);
+    cmd_publisher = node->create_publisher<std_msgs::msg::String>("command", 10);
+    plan_publisher = node->create_publisher<cobot_msgs::msg::Command>("plan_request", 10);
+    m_actionlist = QStringList() << "Give" << "Take" << "Open" << "Close" ;
+    m_targetlist = QStringList() << "Separator" << "Common rail" << "Piston" << "Tappet" << "Screw" << "Bolt" << "Tool" << "PLC";
 }
 
-QString Command::action()
+void Command::send(const QString cmd)
 {
-    return m_action;
+    // std::cin.ignore();
+    std_msgs::msg::String message;
+    message.data = cmd.toUtf8().constData();
+    cmd_publisher->publish(message);
+    rclcpp::spin_some(node);
 }
 
-QString Command::targets()
+void Command::plan(const QString qstr_action, const QString qstr_targets)
 {
-    return m_targets;
-}
-
-void Command::setAction(const QString &value)
-{
-    if (value != m_action) {
-       m_action = value;
-       emit actionChanged();
-    }
-}
-
-void Command::setTargets(const QString &value)
-{
-    if (value != m_targets) {
-       m_targets = value;
-       emit targetsChanged();
-    }
-}
-
-void Command::send(const QString qstr_action, const QString qstr_targets){
     // std::cin.ignore();
     cobot_msgs::msg::Command message;
     message.action = qstr_action.toUtf8().constData();
     message.targets.insert(message.targets.end(), qstr_targets.toUtf8().constData()) ;
     RCLCPP_INFO(node->get_logger(), "Publishing: '%s' - '%s", (message.action.c_str(), message.targets[0].c_str()));
-    publisher->publish(message);
+    plan_publisher->publish(message);
     rclcpp::spin_some(node);
 }
+
+QStringList Command::actionlist()
+{
+    return m_actionlist;
+}
+
+QStringList Command::objectlist()
+{
+    return m_targetlist;
+}
+
 

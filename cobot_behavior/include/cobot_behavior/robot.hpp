@@ -17,12 +17,11 @@ class Robot : public QObject
     Q_OBJECT
     Q_PROPERTY(QString targetname READ targetname WRITE setTargetname NOTIFY targetnameChanged)
     Q_PROPERTY(QStringList targetlist READ targetlist NOTIFY targetlisthanged)
-    // Q_PROPERTY(QList<qreal> ee_pose READ ee_pose NOTIFY eeposeChanged)
-
 public:
     explicit Robot(QObject *parent = nullptr);
     QString targetname() ;
     QStringList targetlist();
+    QStringList objectlist();
     // QList<qreal> ee_pose();
     void setTargetname(const QString &value);
 
@@ -39,7 +38,7 @@ public slots:
     void close_gripper();
     void load_targets();
     void grasp1();
-    void routine(const QString value);
+    void routine(const QString value, const QString target);
 
 private:
     std::shared_ptr<rclcpp::Node> node ;

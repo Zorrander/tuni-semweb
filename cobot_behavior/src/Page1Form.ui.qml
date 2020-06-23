@@ -1,17 +1,22 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import CobotCommand 1.0
+import Robot 1.0
 
 Page {
     id: page
-    width: 600
-    height: 400
+    width: 1200
+    height: 800
     property alias button: button
 
     title: qsTr("Page 1")
 
     Command {
         id: command
+    }
+
+    Robot {
+        id: robot
     }
 
     Label {
@@ -38,38 +43,37 @@ Page {
     }
 
     Button {
-        id: button
+        id: planbutton
         x: 457
         y: 274
         width: 114
         height: 109
+        text: "Plan"
+    }
+
+    Connections {
+        target: planbutton
+        onClicked: {
+            print("clicked")
+            command.plan(actionlist.currentText, objectlist.currentText)
+        }
+    }
+
+    Button {
+        id: sendbutton
+        x: 457
+        y: 107
+        width: 114
+        height: 36
         text: "Send"
     }
 
     Connections {
-        target: button
+        target: sendbutton
         onClicked: {
             print("clicked")
-            command.send(action_box.text, target_box.text)
+            command.send(nlpcommand.text)
         }
-    }
-
-    TextField {
-        id: action_box
-        text: command.action
-        placeholderText: qsTr("Action")
-        onTextChanged: command.action = text
-        x: 220
-        y: 274
-    }
-
-    TextField {
-        id: target_box
-        x: 220
-        y: 343
-        text: command.targets
-        onTextChanged: command.targets = text
-        placeholderText: qsTr("Targets")
     }
 
     Rectangle {
@@ -81,18 +85,34 @@ Page {
         color: "#000000"
     }
 
-    TextField {
-        id: dialog_box
-        x: 31
-        y: 63
-        width: 535
-        height: 130
-    }
-
     Label {
         text: qsTr("Dialog")
         anchors.horizontalCenterOffset: -1
         anchors.verticalCenterOffset: -164
         anchors.centerIn: parent
+    }
+
+    ComboBox {
+        id: objectlist
+        x: 231
+        y: 337
+        model: command.actionlist
+    }
+
+    ComboBox {
+        id: actionlist
+        x: 231
+        y: 268
+        model: command.objectlist
+    }
+
+    TextArea {
+        id: nlpcommand
+        x: 128
+        y: 110
+        width: 301
+        height: 29
+        text: qsTr("")
+        placeholderText: "NLP command"
     }
 }

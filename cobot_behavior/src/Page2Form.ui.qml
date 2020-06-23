@@ -46,14 +46,6 @@ Page {
     }
 
     Connections {
-        target: close_gripper_button
-        onClicked: {
-            print("close_gripper_button clicked")
-            robot.close_gripper()
-        }
-    }
-
-    Connections {
         target: load_targets_button
         onClicked: {
             print("load_targets_button clicked")
@@ -62,38 +54,30 @@ Page {
     }
 
     Connections {
-        target: routine_button
         onClicked: {
             print("close_gripper_button clicked")
-            robot.routine(command_input.text)
+            robot.routine(command_input.text, objectList.currentText)
         }
     }
 
     Button {
         id: open_gripper_button
-        x: 439
-        y: 175
+        x: 429
+        y: 176
         text: qsTr("Open")
     }
 
     Button {
         id: close_gripper_button
-        x: 570
-        y: 175
+        x: 560
+        y: 176
         text: qsTr("Close")
-    }
-
-    Button {
-        id: button3
-        x: 849
-        y: 407
-        text: qsTr("Execute controller")
     }
 
     Rectangle {
         id: rectangle
         x: 374
-        y: 283
+        y: 355
         width: 452
         height: 1
         color: "#000000"
@@ -101,44 +85,31 @@ Page {
 
     Label {
         id: label
-        x: 335
-        y: 151
+        x: 325
+        y: 152
         text: qsTr("Gripper")
     }
 
     Label {
         id: label1
         x: 335
-        y: 312
+        y: 384
         text: qsTr("Arm")
     }
 
     Button {
-        id: routine_button
-        x: 649
-        y: 35
-        text: qsTr("Send ")
-    }
-
-    Button {
         id: save_button
-        x: 506
-        y: 347
+        x: 746
+        y: 432
         width: 124
         height: 40
         text: qsTr("Save (Joints)")
     }
 
-    ComboBox {
-        id: comboBox
-        x: 849
-        y: 347
-    }
-
     Button {
         id: move_target_button
-        x: 506
-        y: 415
+        x: 746
+        y: 500
         width: 124
         height: 40
         text: qsTr("Move (Targets)")
@@ -146,8 +117,8 @@ Page {
 
     ComboBox {
         id: target_list
-        x: 260
-        y: 415
+        x: 500
+        y: 500
         width: 200
         model: robot.targetlist
         height: 40
@@ -155,61 +126,23 @@ Page {
 
     TextField {
         id: target_name_input
-        x: 260
-        y: 347
+        x: 500
+        y: 432
         text: qsTr("")
         placeholderText: "Enter joint configuration name..."
     }
 
-    TextField {
-        id: command_input
-        x: 424
-        y: 35
-        text: qsTr("")
-        placeholderText: "Enter a command"
-    }
-
     Button {
         id: grasp1_button
-        x: 718
-        y: 175
+        x: 708
+        y: 176
         text: qsTr("Grasp")
-    }
-
-    Label {
-        id: label2
-        x: 306
-        y: 662
-        text: qsTr("End effector")
-    }
-
-    Label {
-        id: label3
-        x: 306
-        y: 533
-        width: 58
-        height: 26
-        text: qsTr("Joints")
-    }
-
-    ComboBox {
-        id: joints_list
-        x: 306
-        y: 576
-        model: ["joint_1", "joint_2", "joint_3", "joint_4", "joint_5", "joint_6", "joint_7"]
-    }
-
-    ComboBox {
-        id: axis
-        x: 306
-        y: 713
-        model: ["x", "y", "z"]
     }
 
     Button {
         id: load_targets_button
-        x: 674
-        y: 347
+        x: 352
+        y: 432
         width: 124
         height: 108
         text: qsTr("Load targets")

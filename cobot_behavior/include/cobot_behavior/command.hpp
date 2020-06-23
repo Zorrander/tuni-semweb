@@ -11,28 +11,29 @@
 class Command : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString action READ action WRITE setAction NOTIFY actionChanged)
-    Q_PROPERTY(QString targets READ targets WRITE setTargets NOTIFY targetsChanged)
+    Q_PROPERTY(QString actionlist READ actionlist NOTIFY actionlistChanged)
+    Q_PROPERTY(QStringList objectlist READ objectlist NOTIFY objectlistChanged)
 
 public:
     explicit Command(QObject *parent = nullptr);
-    QString action() ;
-    QString targets() ;
-    void setAction(const QString &value);
-    void setTargets(const QString &value);
+    QStringList actionlist() ;
+    QStringList objectlist() ;
 
 signals:
-    void actionChanged();
-    void targetsChanged();
+    void actionlistChanged();
+    void objectlistChanged();
 
 public slots:
-    void send(const QString qstr_action, const QString qstr_targets);
+    void send(const QString cmd);
+    void plan(const QString qstr_action, const QString qstr_targets);
 
 private:
     std::shared_ptr<rclcpp::Node> node ;
-    QString m_action;
-    QString m_targets;
-    rclcpp::Publisher<cobot_msgs::msg::Command>::SharedPtr publisher;
+    QString m_cmd;
+    QStringList m_actionlist;
+    QStringList m_targetlist;
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr cmd_publisher;
+    rclcpp::Publisher<cobot_msgs::msg::Command>::SharedPtr plan_publisher;
 };
 
 #endif // COMMAND
