@@ -15,6 +15,11 @@ Robot::Robot(QObject *parent) :
     // "topic", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
 }
 
+QStringList Robot::targetlist()
+{
+    return m_target_list;
+}
+
 QString Robot::targetname()
 {
     return m_targetname;

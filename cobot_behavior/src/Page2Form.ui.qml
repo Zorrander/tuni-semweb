@@ -14,6 +14,14 @@ Page {
     }
 
     Connections {
+        target: grasp1_button
+        onClicked: {
+            print("grasp1_button clicked")
+            robot.grasp1()
+        }
+    }
+
+    Connections {
         target: save_button
         onClicked: {
             print("save_button clicked")

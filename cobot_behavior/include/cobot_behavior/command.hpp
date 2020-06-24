@@ -11,7 +11,7 @@
 class Command : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString actionlist READ actionlist NOTIFY actionlistChanged)
+    Q_PROPERTY(QStringList actionlist READ actionlist NOTIFY actionlistChanged)
     Q_PROPERTY(QStringList objectlist READ objectlist NOTIFY objectlistChanged)
 
 public:

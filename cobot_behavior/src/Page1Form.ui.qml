@@ -1,29 +1,16 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import CobotCommand 1.0
-import Robot 1.0
 
 Page {
     id: page
     width: 1200
     height: 800
-    property alias button: button
 
     title: qsTr("Page 1")
 
     Command {
         id: command
-    }
-
-    Robot {
-        id: robot
-    }
-
-    Label {
-        text: qsTr("Send commands")
-        anchors.verticalCenterOffset: 61
-        anchors.horizontalCenterOffset: -220
-        anchors.centerIn: parent
     }
 
     Text {
@@ -85,24 +72,17 @@ Page {
         color: "#000000"
     }
 
-    Label {
-        text: qsTr("Dialog")
-        anchors.horizontalCenterOffset: -1
-        anchors.verticalCenterOffset: -164
-        anchors.centerIn: parent
+    ComboBox {
+        id: actionlist
+        x: 231
+        y: 274
+        model: command.actionlist
     }
 
     ComboBox {
         id: objectlist
         x: 231
-        y: 337
-        model: command.actionlist
-    }
-
-    ComboBox {
-        id: actionlist
-        x: 231
-        y: 268
+        y: 344
         model: command.objectlist
     }
 

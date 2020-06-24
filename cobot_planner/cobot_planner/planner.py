@@ -23,15 +23,15 @@ class RosPlanner(Node):
         self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.release = self.create_client(MoveGripper, '/move_gripper')
-        self.sub = self.create_subscription(Command, 'plan_request', self.send_command, 10)
+        self.sub = self.create_subscription(Command, '/plan_request', self.send_command, 10)
 
 
     def add_object(self, name):
         self.world.add_objects(name)
 
     def send_command(self, msg):
-        action = msg.action
-        targets = msg.targets
+        action = msg.action.lower()
+        targets = [x.lower() for x in msg.targets]
         self.get_logger().info('Received: "%s" - "%s"' % (action, targets))
         self.world.send_command(action, targets)
         self.create_plan()
@@ -104,7 +104,9 @@ class RosPlanner(Node):
     def _use_move_operator(self, target):
         def move_to():
             req = ReachCartesianPose.Request()
-            req.tag_id = 4
+            print("_use_move_operator {}...".format(target))
+            req.type = 0 if target else 1
+            print(req)
             self.move_to.call_async(req)
             print("plan moving on")
         return move_to

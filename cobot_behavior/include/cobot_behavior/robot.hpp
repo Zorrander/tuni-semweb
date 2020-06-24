@@ -21,7 +21,6 @@ public:
     explicit Robot(QObject *parent = nullptr);
     QString targetname() ;
     QStringList targetlist();
-    QStringList objectlist();
     // QList<qreal> ee_pose();
     void setTargetname(const QString &value);
 
