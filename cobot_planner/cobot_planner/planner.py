@@ -1,11 +1,14 @@
 import copy
-import rclpy
+import asyncio
 from pathlib import Path
-from ament_index_python.packages import get_package_share_directory
+
+import rclpy
 from rclpy.node import Node
+from ament_index_python.packages import get_package_share_directory
+
 from cobowl.world import DigitalWorld
 from semantic_htn.planner import Planner
-import asyncio
+
 from cobot_msgs.msg import Command
 from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper
 
@@ -76,6 +79,16 @@ class RosPlanner(Node):
     def _get_operator(self, primitive_type, primitive):
         if primitive_type == "IdleTask":
             return self._use_idle_operator()
+        elif primitive_type == "ResetTask":
+            self.onto.panda.isWaitingForSomething = True
+            return self._use_reset_operator()
+        elif primitive_type == "StopTask":
+            self.onto.panda.isWaitingForSomething = True
+            return self._use_stop_operator()
+        elif primitive_type == "LiftingTask":
+            return self._use_move_operator(primitive.has_place_goal)
+        elif primitive_type == "DropingTask":
+            return self._use_move_operator(primitive.has_place_goal)
         elif primitive_type == "WaitForTask":
             self.world.onto.panda.isWaitingForSomething = True
             return self._use_idle_operator()
@@ -105,7 +118,8 @@ class RosPlanner(Node):
         def move_to():
             req = ReachCartesianPose.Request()
             print("_use_move_operator {}...".format(target))
-            req.type = 0 if target else 1
+            req.type = 0 if target.name == "storage" else 1  # else target.name = "handover"
+            # TODO:retrieve from KB
             print(req)
             self.move_to.call_async(req)
             print("plan moving on")
@@ -131,6 +145,17 @@ class RosPlanner(Node):
         def wait():
             print("Waiting...")
         return wait
+
+    def _use_stop_operator(self):
+        def stop():
+            print("Stopping...")
+        return stop
+
+    def _use_reset_operator(self):
+        def reset():
+            print("Reseting...")
+        return reset
+
 
 def main(args=None):
     rclpy.init(args=args)
