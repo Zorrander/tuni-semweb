@@ -596,26 +596,6 @@
     
 
 
-    <!-- http://onto-server-tuni/Panda#HandoverTask -->
-
-    <owl:Class rdf:about="http://onto-server-tuni/Panda#HandoverTask">
-        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
-                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#HumanToRobotHandover"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
-                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#RobotToHumanHandover"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
     <!-- http://onto-server-tuni/Panda#Head -->
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#Head">
@@ -706,10 +686,18 @@
                 </owl:intersectionOf>
             </owl:Class>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#HumanToRobotHandoverTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#HumanToRobotHandoverTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
-                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsHoldingSomething"/>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#HumanToRobotHandover"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -1340,10 +1328,18 @@
                 </owl:intersectionOf>
             </owl:Class>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#RobotToHumanHandoverTask -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#RobotToHumanHandoverTask">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#CompoundTask"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasCondition"/>
-                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#IsNotHoldingSomething"/>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasMethod"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#RobotToHumanHandover"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
