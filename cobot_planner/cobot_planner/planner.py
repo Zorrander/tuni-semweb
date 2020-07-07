@@ -22,7 +22,7 @@ class RosPlanner(Node):
         self.world.add_object("peg")
         self.world.add_object("box")
         self.world.add_object("separator")
-        self.planner = Planner()
+        self.planner = Planner(self.world)
         self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.release = self.create_client(MoveGripper, '/move_gripper')
