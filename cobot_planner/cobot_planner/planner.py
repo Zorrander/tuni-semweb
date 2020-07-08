@@ -34,13 +34,13 @@ class RosPlanner(Node):
 
     def send_command(self, msg):
         action = msg.action.lower()
-        targets = [x.lower() for x in msg.targets]
+        targets = [x.lower() for x in msg.targets] if msg.targets else ["peg"]
         self.get_logger().info('Received: "%s" - "%s"' % (action, targets))
-        self.world.send_command(action, targets)
-        self.create_plan()
+        # self.world.send_command(action, targets)
+        self.create_plan(command=(action, targets))
 
-    def create_plan(self):
-        plan = self.planner.create_plan(self.world)
+    def create_plan(self, command):
+        plan = self.planner.create_plan(command)
         self.get_logger().info('Created plan: "%s"' % plan)
         self.run(plan)
 
@@ -118,7 +118,7 @@ class RosPlanner(Node):
         def move_to():
             req = ReachCartesianPose.Request()
             print("_use_move_operator {}...".format(target))
-            req.type = 0 if target.name == "storage" else 1  # else target.name = "handover"
+            req.type = 0 if target[0].name == "storage" else 1  # else target.name = "handover"
             # TODO:retrieve from KB
             print(req)
             self.move_to.call_async(req)
