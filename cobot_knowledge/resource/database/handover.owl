@@ -1652,6 +1652,14 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#StopOperator -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#StopOperator">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#ArmOperator"/>
+    </owl:Class>
+    
+
+
     <!-- http://onto-server-tuni/Panda#StopTask -->
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#StopTask">
