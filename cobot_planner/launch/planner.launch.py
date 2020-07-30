@@ -15,14 +15,11 @@ def generate_launch_description():
             description='Prefix for node names'),
 
         launch_ros.actions.Node(
-            package='cobot_planner', node_executable='planner', output='screen', env=myenv,
-            node_name=[launch.substitutions.LaunchConfiguration('node_prefix'), 'planner']),
-
-        launch_ros.actions.Node(
-            package='cobot_knowledge', node_executable='world', output='screen', env=myenv,
-            node_name=[launch.substitutions.LaunchConfiguration('node_prefix'), 'world']),
+            package='cobot_planner', node_executable='real_robot', output='screen', env=myenv,
+            node_name=[launch.substitutions.LaunchConfiguration('node_prefix'), 'real_robot']),
 
         launch_ros.actions.Node(
             package='cobot_nlp', node_executable='listener', output='screen', env=myenv,
             node_name=[launch.substitutions.LaunchConfiguration('node_prefix'), 'listener']),
+
     ])

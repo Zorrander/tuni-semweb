@@ -23,7 +23,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'planner = cobot_planner.planner:main'
+            'real_robot = cobot_planner.real_robot:main'
         ],
     },
 )
