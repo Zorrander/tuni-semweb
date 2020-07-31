@@ -12,11 +12,18 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
     def __init__(self, knowledge_base_path):
         Node.__init__(self, 'real_robot')
         CollaborativeRobotInterface.__init__(self, knowledge_base_path)
-        self.world.add_object("peg")
         self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.release = self.create_client(MoveGripper, '/move_gripper')
-        self.sub = self.create_subscription(Command, '/plan_request', self.send_command, 10)
+        self.sub = self.create_subscription(Command, '/plan_request', self.execute, 10)
+        ### TODO: remove test objects
+        self.world.add_object("peg")  # Manually create an object or testing purposes
+
+    def send_command(self, command_msg):
+        print("Received command: ", command_msg)
+        action = command_msg.action
+        target = command_msg.targets
+        self.world.send_command(action, target)
 
     def move_operator(self, target):
         def move_to():
@@ -64,8 +71,9 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
 def main(args=None):
     rclpy.init(args=args)
     RESOURCE_PATH = get_package_share_directory('cobot_knowledge')
-    kb_path = Path(RESOURCE_PATH)/'handover.owl')
-    node = RealCollaborativeRobot()
+    kb_path = str(Path(RESOURCE_PATH)/ 'handover.owl')
+    print("Loading knowledge base at {}".format(kb_path))
+    node = RealCollaborativeRobot(kb_path)
 
     rclpy.spin(node)
 
