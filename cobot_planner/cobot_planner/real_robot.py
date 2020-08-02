@@ -15,7 +15,7 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
         self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.release = self.create_client(MoveGripper, '/move_gripper')
-        self.sub = self.create_subscription(Command, '/plan_request', self.execute, 10)
+        self.sub = self.create_subscription(Command, '/plan_request', self.run, 10)
         ### TODO: remove test objects
         self.world.add_object("peg")  # Manually create an object or testing purposes
 
