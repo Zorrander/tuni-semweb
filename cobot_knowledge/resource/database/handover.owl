@@ -68,6 +68,12 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#hasAction -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#hasAction"/>
+    
+
+
     <!-- http://onto-server-tuni/Panda#hasAttribute -->
 
     <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#hasAttribute">
@@ -496,7 +502,14 @@
 
     <!-- http://onto-server-tuni/Panda#Command -->
 
-    <owl:Class rdf:about="http://onto-server-tuni/Panda#Command"/>
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Command">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#hasAction"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#TriggerWord"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
     
 
 
@@ -1095,6 +1108,14 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#Modifier -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Modifier">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Vocabulary"/>
+    </owl:Class>
+    
+
+
     <!-- http://onto-server-tuni/Panda#MoveOperator -->
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#MoveOperator">
@@ -1235,6 +1256,14 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#PickCommand -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PickCommand">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PlanRequest"/>
+    </owl:Class>
+    
+
+
     <!-- http://onto-server-tuni/Panda#PickMethod -->
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#PickMethod">
@@ -1333,6 +1362,14 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#PlanRequest -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#PlanRequest">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Command"/>
+    </owl:Class>
+    
+
+
     <!-- http://onto-server-tuni/Panda#PositioningTask -->
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#PositioningTask">
@@ -1369,6 +1406,14 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#ReachCommand -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#ReachCommand">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PlanRequest"/>
+    </owl:Class>
+    
+
+
     <!-- http://onto-server-tuni/Panda#ReachTask -->
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#ReachTask">
@@ -1399,6 +1444,14 @@
                 <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#MoveOperator"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#ReadySignal -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#ReadySignal">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Signal"/>
     </owl:Class>
     
 
@@ -1616,6 +1669,14 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#Signal -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Signal">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Command"/>
+    </owl:Class>
+    
+
+
     <!-- http://onto-server-tuni/Panda#Size -->
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#Size">
@@ -1656,6 +1717,14 @@
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#StopOperator">
         <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#ArmOperator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#StopSignal -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#StopSignal">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Signal"/>
     </owl:Class>
     
 
@@ -1707,6 +1776,20 @@
     <owl:Class rdf:about="http://onto-server-tuni/Panda#TranslationTask">
         <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PositioningTask"/>
     </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#TriggerWord -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#TriggerWord">
+        <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Vocabulary"/>
+    </owl:Class>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#Vocabulary -->
+
+    <owl:Class rdf:about="http://onto-server-tuni/Panda#Vocabulary"/>
     
 
 

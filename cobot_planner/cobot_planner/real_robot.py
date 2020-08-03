@@ -21,6 +21,28 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
         ### TODO: remove test objects
         self.world.add_object("peg")  # Manually create an object or testing purposes
 
+    def say_hello(self, commands):
+        self.prompt_welcome(commands)
+        self.introduce_itself(commands)
+
+    def prompt_welcome(self, commands):
+        print()
+        print("PANDA PLATFORM INTERFACE")
+        print("========================")
+        print()
+        print("To command the robot use one of the following trigger words:")
+        for cmd in commands:
+            print("- {}".format(cmd))
+
+    def introduce_itself(self):
+        pass
+
+    def pre_notify(self, task):
+        print("About to perform {}".format(task))
+
+    def post_notify(self, task):
+        print("{} completed".format(task))
+
     def send_command(self, command_msg):
         print("Received command: ", command_msg)
         action = command_msg.action
@@ -72,12 +94,13 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
             req = NamedTarget.Request()
             req.name = 'ready'
             self.reach_named_target.call_async(req)
+            self.world.add_object("peg")
         return reset
 
     def handle_anchoring_error(self, object):
         print("REACH FINAL STAGE OF ERROR")
         print("COULD NOT ANCHOR", object)
-        
+
 def main(args=None):
     rclpy.init(args=args)
     RESOURCE_PATH = get_package_share_directory('cobot_knowledge')
