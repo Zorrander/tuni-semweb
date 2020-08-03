@@ -3,9 +3,9 @@ from rclpy.node import Node
 from ament_index_python.packages import get_package_share_directory
 from pathlib import Path
 from cobowl.robot import CollaborativeRobotInterface
-
 from cobot_msgs.msg import Command
-from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper
+from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper, NamedTarget
+from std_srvs.srv import Trigger
 
 class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
 
@@ -14,7 +14,9 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
         CollaborativeRobotInterface.__init__(self, knowledge_base_path)
         self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
+        self.reach_named_target = self.create_client(NamedTarget, '/move_to')
         self.release = self.create_client(MoveGripper, '/move_gripper')
+        self.reset = self.create_client(Trigger, '/reset')
         self.sub = self.create_subscription(Command, '/plan_request', self.run, 10)
         ### TODO: remove test objects
         self.world.add_object("peg")  # Manually create an object or testing purposes
@@ -64,10 +66,18 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
 
     def reset_operator(self):
         def reset():
-            print("Reseting...")
+            req = Trigger.Request()
+            self.reset.call_async(req)
+            self.reload_knowledge()
+            req = NamedTarget.Request()
+            req.name = 'ready'
+            self.reach_named_target.call_async(req)
         return reset
 
-
+    def handle_anchoring_error(self, object):
+        print("REACH FINAL STAGE OF ERROR")
+        print("COULD NOT ANCHOR", object)
+        
 def main(args=None):
     rclpy.init(args=args)
     RESOURCE_PATH = get_package_share_directory('cobot_knowledge')
