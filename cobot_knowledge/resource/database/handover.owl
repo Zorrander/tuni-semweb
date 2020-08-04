@@ -10,9 +10,7 @@
      xmlns:Panda="http://onto-server-tuni/Panda#"
      xmlns:cogrob="http://onto-server-tuni.herokuapp.com/Panda#"
      xmlns:annotation="http://purl.org/ieee1872-owl/annotation#">
-    <owl:Ontology rdf:about="http://onto-server-tuni/Panda">
-        <owl:imports rdf:resource="http://purl.org/ieee1872-owl/cora"/>
-    </owl:Ontology>
+    <owl:Ontology rdf:about="http://onto-server-tuni/Panda"/>
     
 
 
@@ -53,6 +51,7 @@
     <!-- http://onto-server-tuni/Panda#actsOn -->
 
     <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#actsOn">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Task"/>
         <rdfs:range rdf:resource="http://onto-server-tuni/Panda#Object"/>
     </owl:ObjectProperty>
@@ -165,6 +164,12 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#triggers -->
+
+    <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#triggers"/>
+    
+
+
     <!-- http://onto-server-tuni/Panda#useOperator -->
 
     <owl:ObjectProperty rdf:about="http://onto-server-tuni/Panda#useOperator">
@@ -203,9 +208,21 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#has_received_command -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#has_received_command">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://onto-server-tuni/Panda#has_target -->
 
-    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#has_target"/>
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#has_target">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto-server-tuni/Panda#Command"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
     
 
 
@@ -220,6 +237,7 @@
     <!-- http://onto-server-tuni/Panda#isCapableOfReaching -->
 
     <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#isCapableOfReaching">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
@@ -1426,6 +1444,12 @@
         <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PlanRequest"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#triggers"/>
+                <owl:someValuesFrom rdf:resource="http://onto-server-tuni/Panda#ReachTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#is_triggered_by"/>
                 <owl:hasValue>reach</owl:hasValue>
             </owl:Restriction>
@@ -1904,6 +1928,16 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#does_not_hold -->
+
+    <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#does_not_hold">
+        <rdf:type rdf:resource="http://onto-server-tuni/Panda#IsNotHoldingSomething"/>
+        <Panda:subject rdf:resource="http://onto-server-tuni/Panda#panda"/>
+        <Panda:isHoldingSomething rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Panda:isHoldingSomething>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://onto-server-tuni/Panda#handover -->
 
     <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#handover">
@@ -1912,10 +1946,33 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#not_within_reach -->
+
+    <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#not_within_reach">
+        <rdf:type rdf:resource="http://onto-server-tuni/Panda#IsNotCapableOfReaching"/>
+        <Panda:subject rdf:resource="http://onto-server-tuni/Panda#panda"/>
+        <Panda:isCapableOfReaching rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Panda:isCapableOfReaching>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://onto-server-tuni/Panda#panda -->
 
     <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#panda">
         <rdf:type rdf:resource="http://onto-server-tuni/Panda#Robot"/>
+        <Panda:has_received_command rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Panda:has_received_command>
+        <Panda:isCapableOfReaching rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Panda:isCapableOfReaching>
+        <Panda:isHoldingSomething rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Panda:isHoldingSomething>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#received_command -->
+
+    <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#received_command">
+        <rdf:type rdf:resource="http://onto-server-tuni/Panda#ReceivedCommand"/>
+        <Panda:subject rdf:resource="http://onto-server-tuni/Panda#panda"/>
+        <Panda:has_received_command rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</Panda:has_received_command>
     </owl:NamedIndividual>
     
 
@@ -1924,6 +1981,16 @@
 
     <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#storage">
         <rdf:type rdf:resource="http://onto-server-tuni/Panda#PhysicalPlace"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto-server-tuni/Panda#within_reach -->
+
+    <owl:NamedIndividual rdf:about="http://onto-server-tuni/Panda#within_reach">
+        <rdf:type rdf:resource="http://onto-server-tuni/Panda#IsCapableOfReaching"/>
+        <Panda:subject rdf:resource="http://onto-server-tuni/Panda#panda"/>
+        <Panda:isCapableOfReaching rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</Panda:isCapableOfReaching>
     </owl:NamedIndividual>
     
 
