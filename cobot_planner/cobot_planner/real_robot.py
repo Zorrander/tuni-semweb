@@ -9,9 +9,9 @@ from std_srvs.srv import Trigger
 
 class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
 
-    def __init__(self, knowledge_base_path):
+    def __init__(self, knowledge_base_path, user_folder):
         Node.__init__(self, 'real_robot')
-        CollaborativeRobotInterface.__init__(self, knowledge_base_path)
+        CollaborativeRobotInterface.__init__(self, knowledge_base_path, user_folder)
         self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.reach_named_target = self.create_client(NamedTarget, '/move_to')
@@ -34,7 +34,7 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
         for cmd in commands:
             print("- {}".format(cmd))
 
-    def introduce_itself(self):
+    def introduce_itself(self, commands):
         pass
 
     def pre_notify(self, task):
@@ -105,8 +105,8 @@ def main(args=None):
     rclpy.init(args=args)
     RESOURCE_PATH = get_package_share_directory('cobot_knowledge')
     kb_path = str(Path(RESOURCE_PATH)/ 'handover.owl')
-    print("Loading knowledge base at {}".format(kb_path))
-    node = RealCollaborativeRobot(kb_path)
+    user_kb_path = str(Path(RESOURCE_PATH) / 'user_defined')
+    node = RealCollaborativeRobot(kb_path, user_kb_path)
 
     rclpy.spin(node)
 

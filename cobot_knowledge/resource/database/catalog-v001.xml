@@ -2,14 +2,14 @@
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
     <uri id="Imports Wizard Entry" name="http://purl.org/ieee1872-owl/cora" uri="cora.owl"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1596202753024" name="http://onto-server-tuni.herokuapp.com/Panda" uri="handover.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1596202753024" name="http://purl.org/ieee1872-owl/annotation" uri="annotation.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1596202753024" name="http://purl.org/ieee1872-owl/cora" uri="cora.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1596202753024" name="http://purl.org/ieee1872-owl/cora-bare" uri="cora-bare.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1596202753024" name="http://purl.org/ieee1872-owl/cora-fullaxiom" uri="cora-fullaxiom.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1596202753024" name="http://purl.org/ieee1872-owl/corax" uri="corax.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1596202753024" name="http://purl.org/ieee1872-owl/pos" uri="pos.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1596202753024" name="http://purl.org/ieee1872-owl/rparts" uri="rparts.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1596202753024" name="http://purl.org/ieee1872-owl/sumo-cora" uri="sumo-cora.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1596525509258" name="http://onto-server-tuni.herokuapp.com/Panda" uri="handover.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1596525509258" name="http://purl.org/ieee1872-owl/annotation" uri="annotation.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1596525509258" name="http://purl.org/ieee1872-owl/cora" uri="cora.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1596525509258" name="http://purl.org/ieee1872-owl/cora-bare" uri="cora-bare.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1596525509258" name="http://purl.org/ieee1872-owl/cora-fullaxiom" uri="cora-fullaxiom.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1596525509258" name="http://purl.org/ieee1872-owl/corax" uri="corax.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1596525509258" name="http://purl.org/ieee1872-owl/pos" uri="pos.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1596525509258" name="http://purl.org/ieee1872-owl/rparts" uri="rparts.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1596525509258" name="http://purl.org/ieee1872-owl/sumo-cora" uri="sumo-cora.owl"/>
     </group>
 </catalog>

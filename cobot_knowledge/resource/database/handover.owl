@@ -302,6 +302,14 @@
     
 
 
+    <!-- http://onto-server-tuni/Panda#is_triggered_by -->
+
+    <owl:DatatypeProperty rdf:about="http://onto-server-tuni/Panda#is_triggered_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -1260,6 +1268,12 @@
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#PickCommand">
         <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PlanRequest"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#is_triggered_by"/>
+                <owl:hasValue>pick</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1410,6 +1424,12 @@
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#ReachCommand">
         <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#PlanRequest"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#is_triggered_by"/>
+                <owl:hasValue>reach</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1452,6 +1472,12 @@
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#ReadySignal">
         <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Signal"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#is_triggered_by"/>
+                <owl:hasValue>ready</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1725,6 +1751,12 @@
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#StopSignal">
         <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#Signal"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#is_triggered_by"/>
+                <owl:hasValue>stop</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
