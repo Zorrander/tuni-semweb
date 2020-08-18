@@ -15,9 +15,10 @@ class Listener(Node):
     def chatter_callback(self, msg):
         self.get_logger().info('I heard: [%s]' % msg.data)
         # test = self.nlp.run(msg.data)
+        test = msg.data.split(' ')
         cmd = Command()
-        cmd.action=msg.data
-        #cmd.targets = test[1]
+        cmd.action= test[0]
+        cmd.targets = [test[1]]
         self.pub.publish(cmd)
 
 
