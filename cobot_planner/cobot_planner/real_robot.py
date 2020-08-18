@@ -6,6 +6,7 @@ from cobowl.robot import CollaborativeRobotInterface
 from cobot_msgs.msg import Command
 from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper, NamedTarget
 from std_srvs.srv import Trigger
+from kb_manager.manager import Manager
 
 class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
 
@@ -20,6 +21,10 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
         self.sub = self.create_subscription(Command, '/plan_request', self.run, 10)
         ### TODO: remove test objects
         self.world.add_object("peg")  # Manually create an object or testing purposes
+
+        self.gui = Manager(self.world)
+        self.world.attach(self.gui)
+        self.gui.start()
 
     def say_hello(self, commands):
         self.prompt_welcome(commands)
@@ -47,7 +52,7 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
         print("Received command: ", command_msg)
         action = command_msg.action
         target = command_msg.targets
-        self.world.send_command(action, target)
+        return self.world.send_command(action, target)
 
     def move_operator(self, target):
         def move_to():
@@ -69,7 +74,7 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
             self.grasp.call_async(req)
         return grasp
 
-    def open_operator(self):
+    def open_operator(self, target):
         def release():
             req = MoveGripper.Request()
             req.width = 8.0
@@ -100,6 +105,9 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
     def handle_anchoring_error(self, object):
         print("REACH FINAL STAGE OF ERROR")
         print("COULD NOT ANCHOR", object)
+
+    def handle_grounding_error(self, object):
+        print("COULD NOT GROUND", object)
 
 def main(args=None):
     rclpy.init(args=args)
