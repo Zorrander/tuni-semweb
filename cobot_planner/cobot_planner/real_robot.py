@@ -1,18 +1,42 @@
 import rclpy
+import os
+from threading import Thread
+import time
 from rclpy.node import Node
 from ament_index_python.packages import get_package_share_directory
 from pathlib import Path
-from cobowl.robot import CollaborativeRobotInterface
+from semrob.robot import robot
+from semrob.world import world
 from cobot_msgs.msg import Command
-from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper, NamedTarget
+from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper, NamedTarget, RobotName
 from std_srvs.srv import Trigger
-from kb_manager.manager import Manager
 
-class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
+# from kb_manager.manager import Manager
 
-    def __init__(self, knowledge_base_path, user_folder):
+class DigitalWorldInterface(Node, world.DigitalWorld):
+    def __init__(self):
+        Node.__init__(self, 'world_interface')
+        world.DigitalWorld.__init__(self)
+        self.robot_name = self.create_client(RobotName, '/robot_name')
+
+    def get_robot_name(self):
+        req = RobotName.Request()
+        print("get_robot_name...")
+        res = self.robot_name.call(req)
+        print(res.name)
+
+
+class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
+
+    def __init__(self):
         Node.__init__(self, 'real_robot')
-        CollaborativeRobotInterface.__init__(self, knowledge_base_path, user_folder)
+
+        world_interface = DigitalWorldInterface()
+        spin_thread = Thread(target=rclpy.spin, args=(world_interface,))
+        spin_thread.start()
+
+        robot.CollaborativeRobotInterface.__init__(self, world_interface)
+
         self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.reach_named_target = self.create_client(NamedTarget, '/move_to')
@@ -20,15 +44,22 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
         self.reset = self.create_client(Trigger, '/reset')
         self.sub = self.create_subscription(Command, '/plan_request', self.run, 10)
         ### TODO: remove test objects
-        self.world.add_object("peg")  # Manually create an object or testing purposes
+        # self.world.add_object("peg")  # Manually create an object or testing purposes
+        #self.gui = Manager(self.world)
+        #self.world.attach(self.gui)
+        #self.gui.start()
+        time.sleep(2)
+        print("ROBOT RUNNING")
 
-        self.gui = Manager(self.world)
-        self.world.attach(self.gui)
-        self.gui.start()
+    def say_hello(self):
+        pass
 
-    def say_hello(self, commands):
-        self.prompt_welcome(commands)
-        self.introduce_itself(commands)
+    def create_plan(self):
+        return self.planner.create_plan()
+
+    def run(self, plan):
+        for action in self.planner.run(plan):
+            self.perform(action)
 
     def prompt_welcome(self, commands):
         print()
@@ -55,36 +86,40 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
         return self.world.send_command(action, target)
 
     def move_operator(self, target):
-        def move_to():
+        print("_use_move_operator {}...".format(target))
+        if target.name == "storage":
             req = ReachCartesianPose.Request()
-            print("_use_move_operator {}...".format(target))
-            req.type = 0 if target[0].name == "storage" else 1  # else target.name = "handover"
-            # TODO:retrieve from KB
-            print(req)
+            req.type = 0
             self.move_to.call_async(req)
-            print("plan moving on")
-        return move_to
+        elif target.name == "handover":
+            req = ReachCartesianPose.Request()
+            req.type = 1
+            self.move_to.call_async(req)
+        elif target.name == "init_pose":
+            req = NamedTarget.Request()
+            req.name = 'ready'
+            self.reach_named_target.call_async(req)
+        else:
+            print("PROBLEM")
+        # return move_to
 
     def close_operator(self, target):
-        def grasp():
-            req = Grasp.Request()
-            req.width = 2.0  # [cm]
-            req.force = 50.0  # [N]
-            print("Grasping {}...".format(target))
-            self.grasp.call_async(req)
-        return grasp
+        req = Grasp.Request()
+        req.width = 2.0  # [cm]
+        req.force = 50.0  # [N]
+        print("Grasping {}...".format(target))
+        self.grasp.call_async(req)
+        # return grasp
 
     def open_operator(self, target):
-        def release():
-            req = MoveGripper.Request()
-            req.width = 8.0
-            self.release.call_async(req)
-        return release
+        req = MoveGripper.Request()
+        req.width = 8.0
+        self.release.call_async(req)
+        # return release
 
     def idle_operator(self):
-        def wait():
-            print("Waiting...")
-        return wait
+        print("Real robot is waiting...")
+        # return wait
 
     def stop_operator(self):
         def stop():
@@ -93,13 +128,7 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
 
     def reset_operator(self):
         def reset():
-            req = Trigger.Request()
-            self.reset.call_async(req)
-            self.reload_knowledge()
-            req = NamedTarget.Request()
-            req.name = 'ready'
-            self.reach_named_target.call_async(req)
-            self.world.add_object("peg")
+            pass
         return reset
 
     def handle_anchoring_error(self, object):
@@ -111,12 +140,12 @@ class RealCollaborativeRobot(Node, CollaborativeRobotInterface):
 
 def main(args=None):
     rclpy.init(args=args)
-    RESOURCE_PATH = get_package_share_directory('cobot_knowledge')
-    kb_path = str(Path(RESOURCE_PATH)/ 'handover.owl')
-    user_kb_path = str(Path(RESOURCE_PATH) / 'user_defined')
-    node = RealCollaborativeRobot(kb_path, user_kb_path)
 
-    rclpy.spin(node)
+    robot = RealCollaborativeRobot()
+
+    while rclpy.ok():
+        plan = robot.create_plan()
+        robot.run(plan)
 
     node.destroy_node()
     rclpy.shutdown()

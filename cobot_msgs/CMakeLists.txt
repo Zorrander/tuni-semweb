@@ -61,6 +61,8 @@ set(srv_files
 
   "srv/ReadTasks.srv"
   "srv/ReadMethods.srv"
+
+  "srv/RobotName.srv"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}

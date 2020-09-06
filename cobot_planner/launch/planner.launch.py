@@ -22,4 +22,8 @@ def generate_launch_description():
             package='cobot_nlp', node_executable='listener', output='screen', env=myenv,
             node_name=[launch.substitutions.LaunchConfiguration('node_prefix'), 'listener']),
 
+        launch_ros.actions.Node(
+            package='cobot_knowledge', node_executable='world', output='screen', env=myenv,
+            node_name=[launch.substitutions.LaunchConfiguration('node_prefix'), 'world']),
+
     ])

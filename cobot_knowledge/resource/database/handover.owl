@@ -1140,6 +1140,12 @@
 
     <owl:Class rdf:about="http://onto-server-tuni/Panda#IsCapableOfReaching">
         <rdfs:subClassOf rdf:resource="http://onto-server-tuni/Panda#State"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto-server-tuni/Panda#isCapableOfReaching"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
