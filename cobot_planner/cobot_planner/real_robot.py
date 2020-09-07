@@ -7,6 +7,7 @@ from ament_index_python.packages import get_package_share_directory
 from pathlib import Path
 from semrob.robot import robot
 from semrob.world import world
+from geometry_msgs.msg import Point
 from cobot_msgs.msg import Command
 from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper, NamedTarget, RobotName
 from std_srvs.srv import Trigger
@@ -17,7 +18,13 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
     def __init__(self):
         Node.__init__(self, 'world_interface')
         world.DigitalWorld.__init__(self)
+        time.sleep(5)
         self.robot_name = self.create_client(RobotName, '/robot_name')
+        self.subscription = self.create_subscription(
+            Point,
+            'target_pose',
+            self.camera_callback,
+            10)
 
     def get_robot_name(self):
         req = RobotName.Request()
@@ -25,6 +32,8 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
         res = self.robot_name.call(req)
         print(res.name)
 
+    def camera_callback(self, msg):
+        self.onto.box1.update_pose(msg.x, msg.y, msg.z)
 
 class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
@@ -89,11 +98,15 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         print("_use_move_operator {}...".format(target))
         if target.name == "storage":
             req = ReachCartesianPose.Request()
-            req.type = 0
+            req.point.x = self.world.onto.storage.x
+            req.point.y = self.world.onto.storage.y
+            req.point.z = self.world.onto.storage.z
             self.move_to.call_async(req)
         elif target.name == "handover":
             req = ReachCartesianPose.Request()
-            req.type = 1
+            req.point.x = self.world.onto.handover.x
+            req.point.y = self.world.onto.handover.y
+            req.point.z = self.world.onto.handover.z
             self.move_to.call_async(req)
         elif target.name == "init_pose":
             req = NamedTarget.Request()
@@ -105,8 +118,8 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
     def close_operator(self, target):
         req = Grasp.Request()
-        req.width = 2.0  # [cm]
-        req.force = 50.0  # [N]
+        req.width = 3.0  # [cm]
+        req.force = 100.0  # [N]
         print("Grasping {}...".format(target))
         self.grasp.call_async(req)
         # return grasp
