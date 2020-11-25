@@ -8,8 +8,10 @@ from pathlib import Path
 from semrob.robot import robot
 from semrob.world import world
 from geometry_msgs.msg import Point
+
 from cobot_msgs.msg import Command
 from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper, NamedTarget, RobotName
+from std_msgs.msg import Empty
 from std_srvs.srv import Trigger
 
 # from kb_manager.manager import Manager
@@ -18,7 +20,7 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
     def __init__(self):
         Node.__init__(self, 'world_interface')
         world.DigitalWorld.__init__(self)
-        time.sleep(5)
+        time.sleep(3)
         self.robot_name = self.create_client(RobotName, '/robot_name')
         self.subscription = self.create_subscription(
             Point,
@@ -45,7 +47,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         spin_thread.start()
 
         robot.CollaborativeRobotInterface.__init__(self, world_interface)
-
+        self.target_reached_pub = self.create_publisher(Empty, '/target_reached', 10)
         self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.reach_named_target = self.create_client(NamedTarget, '/move_to')
@@ -129,6 +131,11 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         req.width = 8.0
         self.release.call_async(req)
         # return release
+
+    def communication_operator(self):
+        print("Real robot is communication_operator...")
+        msg = Empty()
+        self.target_reached_pub.publish(msg)
 
     def idle_operator(self):
         print("Real robot is waiting...")
