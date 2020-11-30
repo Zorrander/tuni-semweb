@@ -27,6 +27,12 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
             'target_pose',
             self.camera_callback,
             10)
+        self.sub = self.create_subscription(Command, '/plan_request', self.process_command, 10)
+        self.human_ready_sub = self.create_subscription(Empty, '/human_ready', self.human_ready, 10)
+        self.target_reached_sub = self.create_subscription(Empty, '/object_released', self.object_released, 10)
+
+    def object_released(self, empty_msg):
+        self.dismiss_command()
 
     def get_robot_name(self):
         req = RobotName.Request()
@@ -36,6 +42,26 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
 
     def camera_callback(self, msg):
         self.onto.box1.update_pose(msg.x, msg.y, msg.z)
+
+    def human_ready(self, empty_msg):
+        print("""
+
+
+
+            self.world.onto.agent.isReady = True
+
+
+
+        """)
+        self.onto.agent.isReady = True
+
+
+
+    def process_command(self, command_msg):
+        print("Received command: ", command_msg)
+        action = command_msg.action
+        target = command_msg.targets
+        return self.send_command(action, target)
 
 class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
@@ -48,12 +74,13 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
         robot.CollaborativeRobotInterface.__init__(self, world_interface)
         self.target_reached_pub = self.create_publisher(Empty, '/target_reached', 10)
+        self.object_released_pub = self.create_publisher(Empty, '/object_released', 10)
         self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.reach_named_target = self.create_client(NamedTarget, '/move_to')
         self.release = self.create_client(MoveGripper, '/move_gripper')
         self.reset = self.create_client(Trigger, '/reset')
-        self.sub = self.create_subscription(Command, '/plan_request', self.run, 10)
+
         ### TODO: remove test objects
         # self.world.add_object("peg")  # Manually create an object or testing purposes
         #self.gui = Manager(self.world)
@@ -64,6 +91,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
     def say_hello(self):
         pass
+
 
     def create_plan(self):
         return self.planner.create_plan()
@@ -90,32 +118,31 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
     def post_notify(self, task):
         print("{} completed".format(task))
 
-    def send_command(self, command_msg):
-        print("Received command: ", command_msg)
-        action = command_msg.action
-        target = command_msg.targets
-        return self.world.send_command(action, target)
 
     def move_operator(self, target):
         print("_use_move_operator {}...".format(target))
+        self.world.onto.agent.isReady = False
+        req = ReachCartesianPose.Request()
         if target.name == "storage":
-            req = ReachCartesianPose.Request()
             req.point.x = self.world.onto.storage.x
             req.point.y = self.world.onto.storage.y
             req.point.z = self.world.onto.storage.z
-            self.move_to.call_async(req)
         elif target.name == "handover":
-            req = ReachCartesianPose.Request()
             req.point.x = self.world.onto.handover.x
             req.point.y = self.world.onto.handover.y
             req.point.z = self.world.onto.handover.z
-            self.move_to.call_async(req)
         elif target.name == "init_pose":
-            req = NamedTarget.Request()
-            req.name = 'ready'
-            self.reach_named_target.call_async(req)
+            #req = NamedTarget.Request()
+            #req.name = 'ready'
+            #self.reach_named_target.call_async(req)
+            req.point.x = self.world.onto.init_pose.x
+            req.point.y = self.world.onto.init_pose.y
+            req.point.z = self.world.onto.init_pose.z
+            msg = Empty()
+            self.object_released_pub.publish(msg)
         else:
             print("PROBLEM")
+        self.move_to.call_async(req)
         # return move_to
 
     def close_operator(self, target):
@@ -127,6 +154,8 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         # return grasp
 
     def open_operator(self, target):
+        msg = Empty()
+        self.object_released_pub.publish(msg)
         req = MoveGripper.Request()
         req.width = 8.0
         self.release.call_async(req)
