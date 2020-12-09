@@ -50,25 +50,12 @@ set(srv_files
   "srv/ReachJointPose.srv"
   "srv/ListTargets.srv"
   "srv/RobotSpeed.srv"
-
-  "srv/Export.srv"
-  "srv/Ask.srv"
-  "srv/CreateInstance.srv"
-  "srv/Describe.srv"
-  "srv/GenerateInstanceName.srv"
-  "srv/Select.srv"
-  "srv/Update.srv"
-
-  "srv/ReadTasks.srv"
-  "srv/ReadMethods.srv"
-
-  "srv/RobotName.srv"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   ${msg_files}
   ${srv_files}
-  DEPENDENCIES builtin_interfaces geometry_msgs
+  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs
 )
 
 ament_package()

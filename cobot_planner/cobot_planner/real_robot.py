@@ -10,7 +10,7 @@ from semrob.world import world
 from geometry_msgs.msg import Point
 
 from cobot_msgs.msg import Command
-from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper, NamedTarget, RobotName
+from cobot_msgs.srv import ReachCartesianPose, Grasp, MoveGripper, NamedTarget, ReachJointPose
 from std_msgs.msg import Empty
 from std_srvs.srv import Trigger
 
@@ -21,12 +21,12 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
         Node.__init__(self, 'world_interface')
         world.DigitalWorld.__init__(self)
         time.sleep(3)
-        self.robot_name = self.create_client(RobotName, '/robot_name')
-        self.subscription = self.create_subscription(
-            Point,
-            'target_pose',
-            self.camera_callback,
-            10)
+        #self.robot_name = self.create_client(RobotName, '/robot_name')
+        #self.subscription = self.create_subscription(
+        #    Point,
+        #    'target_pose',
+        #    self.camera_callback,
+        #    10)
         self.sub = self.create_subscription(Command, '/plan_request', self.process_command, 10)
         self.human_ready_sub = self.create_subscription(Empty, '/human_ready', self.human_ready, 10)
         self.target_reached_sub = self.create_subscription(Empty, '/object_released', self.object_released, 10)
@@ -75,7 +75,8 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         robot.CollaborativeRobotInterface.__init__(self, world_interface)
         self.target_reached_pub = self.create_publisher(Empty, '/target_reached', 10)
         self.object_released_pub = self.create_publisher(Empty, '/object_released', 10)
-        self.move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
+        self.joint_move_to = self.create_client(ReachJointPose, '/go_to_joint_space_goal')
+        self.cartesian_move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.reach_named_target = self.create_client(NamedTarget, '/move_to')
         self.release = self.create_client(MoveGripper, '/move_gripper')
@@ -119,38 +120,63 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         print("{} completed".format(task))
 
 
-    def move_operator(self, target):
+    def move_operator(self, target, dismiss):
         print("_use_move_operator {}...".format(target))
         self.world.onto.agent.isReady = False
-        req = ReachCartesianPose.Request()
+        # req.position.layout.dim[0] = 7
         if target.name == "storage":
-            req.point.x = self.world.onto.storage.x
-            req.point.y = self.world.onto.storage.y
-            req.point.z = self.world.onto.storage.z
+            req = ReachJointPose.Request()
+            print(self.world.onto.storage.joint_1)
+            req.position.data.append(self.world.onto.storage.joint_1)
+            req.position.data.append(self.world.onto.storage.joint_2)
+            req.position.data.append(self.world.onto.storage.joint_3)
+            req.position.data.append(self.world.onto.storage.joint_4)
+            req.position.data.append(self.world.onto.storage.joint_5)
+            req.position.data.append(self.world.onto.storage.joint_6)
+            req.position.data.append(self.world.onto.storage.joint_7)
+            self.joint_move_to.call_async(req)
         elif target.name == "handover":
-            req.point.x = self.world.onto.handover.x
-            req.point.y = self.world.onto.handover.y
-            req.point.z = self.world.onto.handover.z
+            req = ReachCartesianPose.Request()
+            req.pose.position.x = self.world.onto.handover.x
+            req.pose.position.y = self.world.onto.handover.y
+            req.pose.position.z = self.world.onto.handover.z
+            req.pose.orientation.x = self.world.onto.handover.r_x
+            req.pose.orientation.y = self.world.onto.handover.r_y
+            req.pose.orientation.z = self.world.onto.handover.r_z
+            req.pose.orientation.w = self.world.onto.handover.r_w
+            self.cartesian_move_to.call_async(req)
         elif target.name == "init_pose":
+            req = ReachCartesianPose.Request()
             #req = NamedTarget.Request()
             #req.name = 'ready'
             #self.reach_named_target.call_async(req)
-            req.point.x = self.world.onto.init_pose.x
-            req.point.y = self.world.onto.init_pose.y
-            req.point.z = self.world.onto.init_pose.z
+            req.pose.position.x = self.world.onto.init_pose.x
+            req.pose.position.y = self.world.onto.init_pose.y
+            req.pose.position.z = self.world.onto.init_pose.z
+            req.pose.orientation.x = self.world.onto.init_pose.r_x
+            req.pose.orientation.y = self.world.onto.init_pose.r_y
+            req.pose.orientation.z = self.world.onto.init_pose.r_z
+            req.pose.orientation.w = self.world.onto.init_pose.r_w
             msg = Empty()
             self.object_released_pub.publish(msg)
+            self.cartesian_move_to.call_async(req)
         else:
             print("PROBLEM")
-        self.move_to.call_async(req)
+
+        if dismiss:
+            msg = Empty()
+            self.object_released_pub.publish(msg)
         # return move_to
 
-    def close_operator(self, target):
+    def close_operator(self, target, dismiss):
         req = Grasp.Request()
         req.width = 3.0  # [cm]
         req.force = 100.0  # [N]
         print("Grasping {}...".format(target))
         self.grasp.call_async(req)
+        if dismiss:
+            msg = Empty()
+            self.object_released_pub.publish(msg)
         # return grasp
 
     def open_operator(self, target):
