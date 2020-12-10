@@ -35,24 +35,24 @@ include_directories(
  )
 
 set(SOURCE_FILES
-     "src/skill.cpp"
+     # "src/skill.cpp"
      "src/command.cpp"
-     "src/control.cpp"
-     "src/knowledge.cpp"
-     "src/robot.cpp"
-     "src/tasksmodel.cpp"
+     # "src/control.cpp"
+     # "src/knowledge.cpp"
+     # "src/robot.cpp"
+     # "src/tasksmodel.cpp"
      "src/main.cpp"
-     "src/taskslist.cpp"
+     # "src/taskslist.cpp"
  )
 
 set(HEADER_FILES
   "include/cobot_behavior/command.hpp"
-  "include/cobot_behavior/robot.hpp"
-  "include/cobot_behavior/taskslist.hpp"
-  "include/cobot_behavior/skill.hpp"
-  "include/cobot_behavior/control.hpp"
-  "include/cobot_behavior/knowledge.hpp"
-  "include/cobot_behavior/tasksmodel.hpp"
+  # "include/cobot_behavior/robot.hpp"
+  # "include/cobot_behavior/taskslist.hpp"
+  # "include/cobot_behavior/skill.hpp"
+  # "include/cobot_behavior/control.hpp"
+  # "include/cobot_behavior/knowledge.hpp"
+  # "include/cobot_behavior/tasksmodel.hpp"
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} "src/qml.qrc" ${HEADER_FILES})

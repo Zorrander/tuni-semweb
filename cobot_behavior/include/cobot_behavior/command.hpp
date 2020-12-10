@@ -6,6 +6,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
+#include "std_msgs/msg/empty.hpp"
 #include "cobot_msgs/msg/command.hpp"
 
 class Command : public QObject
@@ -26,6 +27,7 @@ signals:
 public slots:
     void send(const QString cmd);
     void plan(const QString qstr_action, const QString qstr_targets);
+    void signal();
 
 private:
     std::shared_ptr<rclcpp::Node> node ;
@@ -34,6 +36,7 @@ private:
     QStringList m_targetlist;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr cmd_publisher;
     rclcpp::Publisher<cobot_msgs::msg::Command>::SharedPtr plan_publisher;
+    rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr human_ready;
 };
 
 #endif // COMMAND

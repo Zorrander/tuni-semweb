@@ -59,8 +59,8 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
 
     def process_command(self, command_msg):
         print("Received command: ", command_msg)
-        action = command_msg.action
-        target = command_msg.targets
+        action = command_msg.action.lower()
+        target = [x.lower() for x in command_msg.targets] if command_msg.targets else []
         return self.send_command(action, target)
 
 class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
@@ -125,25 +125,24 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         self.world.onto.agent.isReady = False
         # req.position.layout.dim[0] = 7
         if target.name == "storage":
-            req = ReachJointPose.Request()
-            print(self.world.onto.storage.joint_1)
-            req.position.data.append(self.world.onto.storage.joint_1)
-            req.position.data.append(self.world.onto.storage.joint_2)
-            req.position.data.append(self.world.onto.storage.joint_3)
-            req.position.data.append(self.world.onto.storage.joint_4)
-            req.position.data.append(self.world.onto.storage.joint_5)
-            req.position.data.append(self.world.onto.storage.joint_6)
-            req.position.data.append(self.world.onto.storage.joint_7)
-            self.joint_move_to.call_async(req)
+            req = ReachCartesianPose.Request()
+            req.pose.position.x = self.world.onto.storage.x
+            req.pose.position.y = self.world.onto.storage.y
+            req.pose.position.z = self.world.onto.storage.z
+            req.pose.orientation.x = 0.0
+            req.pose.orientation.y = 0.0
+            req.pose.orientation.z = 0.0
+            req.pose.orientation.w = 1.0
+            self.cartesian_move_to.call_async(req)
         elif target.name == "handover":
             req = ReachCartesianPose.Request()
             req.pose.position.x = self.world.onto.handover.x
             req.pose.position.y = self.world.onto.handover.y
             req.pose.position.z = self.world.onto.handover.z
-            req.pose.orientation.x = self.world.onto.handover.r_x
-            req.pose.orientation.y = self.world.onto.handover.r_y
-            req.pose.orientation.z = self.world.onto.handover.r_z
-            req.pose.orientation.w = self.world.onto.handover.r_w
+            req.pose.orientation.x = 0.0
+            req.pose.orientation.y = 0.0
+            req.pose.orientation.z = 0.0
+            req.pose.orientation.w = 1.0
             self.cartesian_move_to.call_async(req)
         elif target.name == "init_pose":
             req = ReachCartesianPose.Request()
@@ -153,10 +152,10 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             req.pose.position.x = self.world.onto.init_pose.x
             req.pose.position.y = self.world.onto.init_pose.y
             req.pose.position.z = self.world.onto.init_pose.z
-            req.pose.orientation.x = self.world.onto.init_pose.r_x
-            req.pose.orientation.y = self.world.onto.init_pose.r_y
-            req.pose.orientation.z = self.world.onto.init_pose.r_z
-            req.pose.orientation.w = self.world.onto.init_pose.r_w
+            req.pose.orientation.x = 0.0
+            req.pose.orientation.y = 0.0
+            req.pose.orientation.z = 0.0
+            req.pose.orientation.w = 1.0
             msg = Empty()
             self.object_released_pub.publish(msg)
             self.cartesian_move_to.call_async(req)

@@ -23,7 +23,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'listener = cobot_nlp.listener:main'
+            'listener = cobot_nlp.listener:main',
+            'interactive_shell = cobot_nlp.interactive_shell:main'
         ],
     },
 )

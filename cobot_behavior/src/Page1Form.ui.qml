@@ -63,6 +63,14 @@ Page {
         }
     }
 
+    Connections {
+        target: human_ready_btn
+        onClicked: {
+            print("clicked")
+            command.signal()
+        }
+    }
+
     Rectangle {
         id: rectangle
         x: 31
@@ -94,5 +102,14 @@ Page {
         height: 29
         text: qsTr("")
         placeholderText: "NLP command"
+    }
+
+    Button {
+        id: human_ready_btn
+        x: 269
+        y: 444
+        width: 160
+        height: 39
+        text: "Human Ready"
     }
 }

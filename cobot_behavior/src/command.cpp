@@ -7,6 +7,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
+#include "std_msgs/msg/empty.hpp"
 #include "cobot_msgs/msg/command.hpp"
 
 Command::Command(QObject *parent) :
@@ -15,8 +16,9 @@ Command::Command(QObject *parent) :
     node = rclcpp::Node::make_shared("minimal_publisher");
     cmd_publisher = node->create_publisher<std_msgs::msg::String>("command", 10);
     plan_publisher = node->create_publisher<cobot_msgs::msg::Command>("plan_request", 10);
+    human_ready = node->create_publisher<std_msgs::msg::Empty>("/human_ready", 10);
     m_actionlist = QStringList() << "Give" << "Take" << "Open" << "Close" ;
-    m_targetlist = QStringList() << "Separator" << "Common rail" << "Piston" << "Tappet" << "Screw" << "Bolt" << "Tool" << "PLC";
+    m_targetlist = QStringList() << "Peg" << "Separator" << "Common rail" << "Piston" << "Tappet" << "Screw" << "Bolt" << "Tool" << "PLC";
 }
 
 void Command::send(const QString cmd)
@@ -39,6 +41,14 @@ void Command::plan(const QString qstr_action, const QString qstr_targets)
     rclcpp::spin_some(node);
 }
 
+void Command::signal()
+{
+    // std::cin.ignore();
+    std_msgs::msg::Empty message;
+    human_ready->publish(message);
+    rclcpp::spin_some(node);
+}
+
 QStringList Command::actionlist()
 {
     return m_actionlist;
@@ -48,5 +58,3 @@ QStringList Command::objectlist()
 {
     return m_targetlist;
 }
-
-

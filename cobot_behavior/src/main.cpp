@@ -1,10 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "include/cobot_behavior/command.hpp"
-#include "include/cobot_behavior/knowledge.hpp"
-#include "include/cobot_behavior/tasksmodel.hpp"
-#include "include/cobot_behavior/taskslist.hpp"
-#include "include/cobot_behavior/robot.hpp"
+// #include "include/cobot_behavior/knowledge.hpp"
+// #include "include/cobot_behavior/tasksmodel.hpp"
+// #include "include/cobot_behavior/taskslist.hpp"
+// #include "include/cobot_behavior/robot.hpp"
 #include <QQmlContext>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
@@ -42,18 +42,18 @@ int main(int argc, char *argv[])
     // auto node = std::make_shared<MinimalSubscriber>() ;
 
     qmlRegisterType<Command>("CobotCommand",1, 0, "Command");
-    qmlRegisterType<Knowledge>("CobotKnowledge",1, 0, "Knowledge");
-    qmlRegisterType<TasksModel>("Tasks",1, 0, "Tasks");
-    qmlRegisterType<Robot>("Robot",1, 0, "Robot");
+    // qmlRegisterType<Knowledge>("CobotKnowledge",1, 0, "Knowledge");
+    // qmlRegisterType<TasksModel>("Tasks",1, 0, "Tasks");
+    // qmlRegisterType<Robot>("Robot",1, 0, "Robot");
 
-    qmlRegisterUncreatableType<TasksList>("TasksList", 1, 0, "TasksList", QStringLiteral("TasksList should not be created in QML"));
+    // qmlRegisterUncreatableType<TasksList>("TasksList", 1, 0, "TasksList", QStringLiteral("TasksList should not be created in QML"));
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
 
-    TasksList tasksList;
-    engine.rootContext()->setContextProperty(QStringLiteral("tasksList"), &tasksList);
+    // TasksList tasksList;
+    // engine.rootContext()->setContextProperty(QStringLiteral("tasksList"), &tasksList);
 
 
     while (rclcpp::ok())
