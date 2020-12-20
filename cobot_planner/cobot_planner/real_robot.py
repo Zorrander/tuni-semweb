@@ -126,6 +126,11 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         # req.position.layout.dim[0] = 7
         if target.name == "storage":
             req = ReachCartesianPose.Request()
+            req = NamedTarget.Request()
+            req.name = 'part'
+            self.reach_named_target.call_async(req)
+            '''
+            req = ReachCartesianPose.Request()
             req.pose.position.x = self.world.onto.storage.x
             req.pose.position.y = self.world.onto.storage.y
             req.pose.position.z = self.world.onto.storage.z
@@ -134,7 +139,13 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             req.pose.orientation.z = 0.0
             req.pose.orientation.w = 1.0
             self.cartesian_move_to.call_async(req)
+            '''
         elif target.name == "handover":
+            req = ReachCartesianPose.Request()
+            req = NamedTarget.Request()
+            req.name = 'box'
+            self.reach_named_target.call_async(req)
+            '''
             req = ReachCartesianPose.Request()
             req.pose.position.x = self.world.onto.handover.x
             req.pose.position.y = self.world.onto.handover.y
@@ -144,11 +155,13 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             req.pose.orientation.z = 0.0
             req.pose.orientation.w = 1.0
             self.cartesian_move_to.call_async(req)
+            '''
         elif target.name == "init_pose":
             req = ReachCartesianPose.Request()
-            #req = NamedTarget.Request()
-            #req.name = 'ready'
-            #self.reach_named_target.call_async(req)
+            req = NamedTarget.Request()
+            req.name = 'ready'
+            self.reach_named_target.call_async(req)
+            '''
             req.pose.position.x = self.world.onto.init_pose.x
             req.pose.position.y = self.world.onto.init_pose.y
             req.pose.position.z = self.world.onto.init_pose.z
@@ -156,6 +169,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             req.pose.orientation.y = 0.0
             req.pose.orientation.z = 0.0
             req.pose.orientation.w = 1.0
+            '''
             msg = Empty()
             self.object_released_pub.publish(msg)
             self.cartesian_move_to.call_async(req)
