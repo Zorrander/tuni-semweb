@@ -18,7 +18,7 @@ class RosPlanner(Node):
 
     def __init__(self):
         super().__init__('planner')
-        self.world = DigitalWorld(base=str(Path(RESOURCE_PATH)/'handover.owl'))
+        self.world = DigitalWorld(base=str(Path(RESOURCE_PATH)/'handover.owl'))        
         self.world.add_object("peg")
         self.world.add_object("box")
         self.world.add_object("separator")

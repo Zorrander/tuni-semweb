@@ -19,8 +19,10 @@ from std_srvs.srv import Trigger
 class DigitalWorldInterface(Node, world.DigitalWorld):
     def __init__(self):
         Node.__init__(self, 'world_interface')
-        world.DigitalWorld.__init__(self)
-        time.sleep(3)
+        self.declare_parameter('world_file')
+        param_str = self.get_parameter('world_file')
+        print("PARAMETER WORLD FILE = {}".format(str(param_str.value)))
+        world.DigitalWorld.__init__(self, str(param_str.value))
         #self.robot_name = self.create_client(RobotName, '/robot_name')
         #self.subscription = self.create_subscription(
         #    Point,
