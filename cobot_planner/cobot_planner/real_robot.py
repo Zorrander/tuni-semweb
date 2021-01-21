@@ -23,6 +23,7 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
         param_str = self.get_parameter('world_file')
         print("PARAMETER WORLD FILE = {}".format(str(param_str.value)))
         world.DigitalWorld.__init__(self, str(param_str.value))
+        self.locked = False
         #self.robot_name = self.create_client(RobotName, '/robot_name')
         #self.subscription = self.create_subscription(
         #    Point,
@@ -32,6 +33,13 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
         self.sub = self.create_subscription(Command, '/plan_request', self.process_command, 10)
         self.human_ready_sub = self.create_subscription(Empty, '/human_ready', self.human_ready, 10)
         self.target_reached_sub = self.create_subscription(Empty, '/object_released', self.object_released, 10)
+        self.action_performed = self.create_subscription(Empty, '/action_performed', self.release, 10)
+
+    def acquire(self):
+        self.locked = True
+
+    def release(self, empty_msg):
+        self.locked = False
 
     def object_released(self, empty_msg):
         self.dismiss_command()
@@ -78,18 +86,17 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         self.target_reached_pub = self.create_publisher(Empty, '/target_reached', 10)
         self.object_released_pub = self.create_publisher(Empty, '/object_released', 10)
         self.joint_move_to = self.create_client(ReachJointPose, '/go_to_joint_space_goal')
+
         self.cartesian_move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.reach_named_target = self.create_client(NamedTarget, '/move_to')
         self.release = self.create_client(MoveGripper, '/move_gripper')
         self.reset = self.create_client(Trigger, '/reset')
-
         ### TODO: remove test objects
         # self.world.add_object("peg")  # Manually create an object or testing purposes
         #self.gui = Manager(self.world)
         #self.world.attach(self.gui)
         #self.gui.start()
-        time.sleep(2)
         print("ROBOT RUNNING")
 
     def say_hello(self):
@@ -99,9 +106,24 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
     def create_plan(self):
         return self.planner.create_plan()
 
+    def perform_primitive(self, primitive):
+        print("[REAL ROBOT] perform primitive {}".format(primitive))
+        self.world.acquire()
+        self.perform(primitive)
+        while self.world.locked:
+            time.sleep(0.5)
+
+    def perform_sequence(self, sequence):
+        if sequence.has_head:
+            self.perform_sequence(sequence.has_head)
+            if sequence.has_tail:
+                self.perform_sequence(sequence.has_tail)
+        else:
+            self.perform_primitive(sequence)
+
     def run(self, plan):
         for action in self.planner.run(plan):
-            self.perform(action)
+            self.perform_sequence(action)
 
     def prompt_welcome(self, commands):
         print()
