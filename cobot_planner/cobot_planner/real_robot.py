@@ -71,7 +71,7 @@ class DigitalWorldInterface(Node, world.DigitalWorld):
         print("Received command: ", command_msg)
         action = command_msg.action.lower()
         target = [x.lower() for x in command_msg.targets] if command_msg.targets else []
-        return self.send_command(action, target)
+        self.send_command(action, target)
 
 class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
@@ -92,6 +92,8 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         self.reach_named_target = self.create_client(NamedTarget, '/move_to')
         self.release = self.create_client(MoveGripper, '/move_gripper')
         self.reset = self.create_client(Trigger, '/reset')
+        self.idle = self.create_client(Trigger, '/idle')
+        self.communicate = self.create_client(Trigger, '/communicate')
         ### TODO: remove test objects
         # self.world.add_object("peg")  # Manually create an object or testing purposes
         #self.gui = Manager(self.world)
@@ -149,7 +151,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         self.world.onto.agent.isReady = False
         # req.position.layout.dim[0] = 7
         if target.name == "storage":
-            req = ReachCartesianPose.Request()
+            # req = ReachCartesianPose.Request()
             req = NamedTarget.Request()
             req.name = 'part'
             self.reach_named_target.call_async(req)
@@ -165,7 +167,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             self.cartesian_move_to.call_async(req)
             '''
         elif target.name == "handover":
-            req = ReachCartesianPose.Request()
+            # req = ReachCartesianPose.Request()
             req = NamedTarget.Request()
             req.name = 'box'
             self.reach_named_target.call_async(req)
@@ -181,7 +183,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             self.cartesian_move_to.call_async(req)
             '''
         elif target.name == "init_pose":
-            req = ReachCartesianPose.Request()
+            # req = ReachCartesianPose.Request()
             req = NamedTarget.Request()
             req.name = 'ready'
             self.reach_named_target.call_async(req)
@@ -194,9 +196,9 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             req.pose.orientation.z = 0.0
             req.pose.orientation.w = 1.0
             '''
-            msg = Empty()
-            self.object_released_pub.publish(msg)
-            self.cartesian_move_to.call_async(req)
+            # msg = Empty()
+            # self.object_released_pub.publish(msg)
+            # self.cartesian_move_to.call_async(req)
         else:
             print("PROBLEM")
 
@@ -228,9 +230,13 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         print("Real robot is communication_operator...")
         msg = Empty()
         self.target_reached_pub.publish(msg)
+        req = Trigger.Request()
+        self.communicate.call_async(req)
 
     def idle_operator(self):
         print("Real robot is waiting...")
+        req = Trigger.Request()
+        self.idle.call_async(req)
         # return wait
 
     def stop_operator(self):
@@ -242,6 +248,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         def reset():
             pass
         return reset
+
 
     def handle_anchoring_error(self, object):
         print("REACH FINAL STAGE OF ERROR")
