@@ -150,12 +150,16 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         print("_use_move_operator {}...".format(target))
         self.world.onto.agent.isReady = False
         # req.position.layout.dim[0] = 7
+        req = NamedTarget.Request()
+        req.name = target
+        self.reach_named_target.call_async(req)
+        '''
         if target.name == "storage":
             # req = ReachCartesianPose.Request()
             req = NamedTarget.Request()
             req.name = 'part'
             self.reach_named_target.call_async(req)
-            '''
+
             req = ReachCartesianPose.Request()
             req.pose.position.x = self.world.onto.storage.x
             req.pose.position.y = self.world.onto.storage.y
@@ -165,13 +169,13 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             req.pose.orientation.z = 0.0
             req.pose.orientation.w = 1.0
             self.cartesian_move_to.call_async(req)
-            '''
+
         elif target.name == "handover":
             # req = ReachCartesianPose.Request()
             req = NamedTarget.Request()
             req.name = 'box'
             self.reach_named_target.call_async(req)
-            '''
+
             req = ReachCartesianPose.Request()
             req.pose.position.x = self.world.onto.handover.x
             req.pose.position.y = self.world.onto.handover.y
@@ -181,13 +185,13 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             req.pose.orientation.z = 0.0
             req.pose.orientation.w = 1.0
             self.cartesian_move_to.call_async(req)
-            '''
+
         elif target.name == "init_pose":
             # req = ReachCartesianPose.Request()
             req = NamedTarget.Request()
             req.name = 'ready'
             self.reach_named_target.call_async(req)
-            '''
+
             req.pose.position.x = self.world.onto.init_pose.x
             req.pose.position.y = self.world.onto.init_pose.y
             req.pose.position.z = self.world.onto.init_pose.z
@@ -195,16 +199,16 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             req.pose.orientation.y = 0.0
             req.pose.orientation.z = 0.0
             req.pose.orientation.w = 1.0
-            '''
+
             # msg = Empty()
             # self.object_released_pub.publish(msg)
             # self.cartesian_move_to.call_async(req)
         else:
             print("PROBLEM")
-
-        if dismiss:
-            msg = Empty()
-            self.object_released_pub.publish(msg)
+        '''
+        #if dismiss:
+        #    msg = Empty()
+        #    self.object_released_pub.publish(msg)
         # return move_to
 
     def close_operator(self, target, dismiss):
@@ -213,16 +217,16 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         req.force = 100.0  # [N]
         print("Grasping {}...".format(target))
         self.grasp.call_async(req)
-        if dismiss:
-            msg = Empty()
-            self.object_released_pub.publish(msg)
+        # if dismiss:
+        #    msg = Empty()
+        #    self.object_released_pub.publish(msg)
         # return grasp
 
     def open_operator(self, target):
-        msg = Empty()
-        self.object_released_pub.publish(msg)
+        # msg = Empty()
+        # self.object_released_pub.publish(msg)
         req = MoveGripper.Request()
-        req.width = 8.0
+        req.width = 2.5
         self.release.call_async(req)
         # return release
 
