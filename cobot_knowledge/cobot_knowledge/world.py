@@ -12,7 +12,7 @@ class RosKnowledge(Node):
 
     def __init__(self):
         super().__init__('world')
-        self.world = world.DigitalWorld()
+        self.world = world.DigitalWorld("sem-htn.owl")
 
         self.robot_name_srv = self.create_service(RobotName, '/robot_name', self.robot_name)
 

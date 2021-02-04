@@ -43,6 +43,17 @@ set(msg_files
 )
 
 set(srv_files
+  "srv/Select.srv"
+  "srv/Describe.srv"
+  "srv/Ask.srv"
+  "srv/Update.srv"
+  "srv/CreateInstance.srv"
+  "srv/GenerateInstanceName.srv"
+  "srv/Export.srv"
+  "srv/ReadMethods.srv"
+  "srv/RobotName.srv"
+  "srv/ReadTasks.srv"
+  
   "srv/Grasp.srv"
   "srv/MoveGripper.srv"
   "srv/NamedTarget.srv"
@@ -50,6 +61,7 @@ set(srv_files
   "srv/ReachJointPose.srv"
   "srv/ListTargets.srv"
   "srv/RobotSpeed.srv"
+
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
