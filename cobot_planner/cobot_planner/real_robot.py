@@ -99,6 +99,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         #self.gui = Manager(self.world)
         #self.world.attach(self.gui)
         #self.gui.start()
+        self.is_waiting = False
         print("ROBOT RUNNING")
 
     def say_hello(self):
@@ -147,6 +148,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
 
     def move_operator(self, target, dismiss):
+        self.is_waiting = False
         print("_use_move_operator {}...".format(target))
         self.world.onto.agent.isReady = False
         # req.position.layout.dim[0] = 7
@@ -212,6 +214,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         # return move_to
 
     def close_operator(self, target, dismiss):
+        self.is_waiting = False
         req = Grasp.Request()
         req.width = 3.0  # [cm]
         req.force = 100.0  # [N]
@@ -223,6 +226,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         # return grasp
 
     def open_operator(self, target):
+        self.is_waiting = False
         # msg = Empty()
         # self.object_released_pub.publish(msg)
         req = MoveGripper.Request()
@@ -232,8 +236,10 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
     def communication_operator(self):
         print("Real robot is communication_operator...")
-        msg = Empty()
-        self.target_reached_pub.publish(msg)
+        if not self.is_waiting:
+            msg = Empty()
+            self.target_reached_pub.publish(msg)
+            self.is_waiting = True
         req = Trigger.Request()
         self.communicate.call_async(req)
 

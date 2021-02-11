@@ -1,0 +1,47 @@
+command,tags
+can you grasp the tool,grasp
+grasp the screw,grasp
+grip that,grasp
+close your gripper,grasp
+close your fingers,grasp
+close now,grasp
+grip the rail,grasp
+put it on the tableput the nut down,drop
+seize it,grasp
+grasp,grasp
+close,grasp
+let go,release
+let it go,release
+release,release
+release it,release
+release the peg,release
+release the screw,release
+release the bolt,release
+open,release
+open your fingers,release
+hold,stop
+hold on,stop
+wait,stop
+wait up,stop
+stop,stop
+break,stop
+halt,stop
+pause,stop
+break off,stop
+go to the bolt,reach
+go to the storage,reach
+reach a tool,reach
+reach a shelf,reach
+get to a screw,reach
+get to the screwdriver,reach
+raise it,lift
+raise,lift
+raise the arm,lift
+lift it up,lift
+lift the screw,lift
+lift up,lift
+take it up,lift
+take it down,drop
+take down,drop
+drop it,drop
+put it down,drop
