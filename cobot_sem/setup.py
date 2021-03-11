@@ -2,7 +2,7 @@ import os
 from glob import glob
 from setuptools import setup
 
-package_name = 'cobot_planner'
+package_name = 'cobot_sem'
 
 setup(
     name=package_name,
@@ -23,7 +23,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'real_robot = cobot_planner.real_robot:main'
+            'real_robot = cobot_sem.real_robot:main',
+            'ros_world = cobot_sem.ros_world:main'
         ],
     },
 )
