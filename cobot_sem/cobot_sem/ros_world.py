@@ -22,7 +22,7 @@ class DigitalWorldInterface(world.DigitalWorld):
         #    self.camera_callback,
         #    10)
         # self.sub = self.create_subscription(Command, '/plan_request', self.process_command, 10)
-        # self.human_ready_sub = self.create_subscription(Empty, '/human_ready', self.human_ready, 10)
+
         # self.target_reached_sub = self.create_subscription(Empty, '/object_released', self.object_released, 10)
 
 
@@ -80,6 +80,3 @@ class DigitalWorldInterface(world.DigitalWorld):
 
     def camera_callback(self, msg):
         self.onto.box1.update_pose(msg.x, msg.y, msg.z)
-
-    def human_ready(self, empty_msg):
-        self.onto.agent.isReady = True

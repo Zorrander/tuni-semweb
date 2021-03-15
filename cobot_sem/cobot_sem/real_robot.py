@@ -30,7 +30,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         self.target_reached_pub = self.create_publisher(Empty, '/target_reached', 10)
         self.object_released_pub = self.create_publisher(Empty, '/object_released', 10)
         self.joint_move_to = self.create_client(ReachJointPose, '/go_to_joint_space_goal')
-
+        self.human_ready_sub = self.create_subscription(Empty, '/human_ready', self.human_ready, 10)
         self.cartesian_move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.reach_named_target = self.create_client(NamedTarget, '/move_to')
@@ -39,26 +39,33 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         self.idle = self.create_client(Trigger, '/idle')
         self.communicate = self.create_client(Trigger, '/communicate')
 
-    def move_operator(self, target, dismiss):
+    def human_ready(self, empty_msg):
+        self.world.onto.agent.isReady = True
+
+    def move_operator(self, target):
         self.is_waiting = False
         print("_use_move_operator {}...".format(target))
         self.world.onto.agent.isReady = False
         # req.position.layout.dim[0] = 7
         req = NamedTarget.Request()
         req.name = target
-        self.reach_named_target.call_async(req)
+        res = self.reach_named_target.call_async(req)
+        while not res.done():
+            time.sleep(0.1)
+        self.release_planner()
 
-    def close_operator(self, target, dismiss):
+    def close_operator(self, target):
         self.is_waiting = False
         req = Grasp.Request()
-        req.width = 3.0  # [cm]
+        print(target)
+        print(target.has_width)
+        req.width = float(target.has_width) if target.has_width else 0.002  # [cm]
         req.force = 100.0  # [N]
         print("Grasping {}...".format(target))
-        self.grasp.call_async(req)
-        # if dismiss:
-        #    msg = Empty()
-        #    self.object_released_pub.publish(msg)
-        # return grasp
+        res = self.grasp.call_async(req)
+        while not res.done():
+            time.sleep(0.1)
+        self.release_planner()
 
     def open_operator(self, target):
         self.is_waiting = False
@@ -66,8 +73,11 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         # self.object_released_pub.publish(msg)
         req = MoveGripper.Request()
         req.width = 2.5
-        self.release.call_async(req)
+        res = self.release.call_async(req)
+        while not res.done():
+            time.sleep(0.1)
         # return release
+        self.release_planner()
 
     def communication_operator(self):
         print("Real robot is communication_operator...")
@@ -76,12 +86,18 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
             self.target_reached_pub.publish(msg)
             self.is_waiting = True
         req = Trigger.Request()
-        self.communicate.call_async(req)
+        res = self.communicate.call_async(req)
+        while not res.done():
+            time.sleep(0.1)
+        self.release_planner()
 
     def idle_operator(self):
         print("Real robot is waiting...")
         req = Trigger.Request()
-        self.idle.call_async(req)
+        res = self.idle.call_async(req)
+        while not res.done():
+            time.sleep(0.1)
+        self.release_planner()
         # return wait
 
     def stop_operator(self):
@@ -106,7 +122,7 @@ def main(args=None):
 
     robot = RealCollaborativeRobot()
     rclpy.spin(robot)
-    
+
     robot.destroy_node()
     rclpy.shutdown()
 
