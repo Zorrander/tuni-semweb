@@ -30,7 +30,10 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         self.target_reached_pub = self.create_publisher(Empty, '/target_reached', 10)
         self.object_released_pub = self.create_publisher(Empty, '/object_released', 10)
         self.joint_move_to = self.create_client(ReachJointPose, '/go_to_joint_space_goal')
+
         self.human_ready_sub = self.create_subscription(Empty, '/human_ready', self.human_ready, 10)
+        self.sub = self.create_subscription(Command, '/plan_request', self.process_command, 10)
+
         self.cartesian_move_to = self.create_client(ReachCartesianPose, '/go_to_cartesian_goal')
         self.grasp = self.create_client(Grasp, '/grasp')
         self.reach_named_target = self.create_client(NamedTarget, '/move_to')
@@ -41,6 +44,12 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
     def human_ready(self, empty_msg):
         self.world.onto.agent.isReady = True
+
+    def process_command(self, command_msg):
+        print("Received command: ", command_msg)
+        action = command_msg.action.lower()
+        target = [x.lower() for x in command_msg.targets] if command_msg.targets else []
+        self.world.send_command(action, target)
 
     def move_operator(self, target):
         self.is_waiting = False

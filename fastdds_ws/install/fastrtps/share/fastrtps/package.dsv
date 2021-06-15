@@ -1,0 +1,9 @@
+source;share/fastrtps/hook/cmake_prefix_path.ps1
+source;share/fastrtps/hook/cmake_prefix_path.dsv
+source;share/fastrtps/hook/cmake_prefix_path.sh
+source;share/fastrtps/hook/ld_library_path_lib.ps1
+source;share/fastrtps/hook/ld_library_path_lib.dsv
+source;share/fastrtps/hook/ld_library_path_lib.sh
+source;share/fastrtps/hook/path.ps1
+source;share/fastrtps/hook/path.dsv
+source;share/fastrtps/hook/path.sh

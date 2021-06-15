@@ -26,21 +26,7 @@ class DigitalWorldInterface(world.DigitalWorld):
         # self.target_reached_sub = self.create_subscription(Empty, '/object_released', self.object_released, 10)
 
 
-    def process_command(self, command_msg):
-        print("Received command: ", command_msg)
-        action = command_msg.action.lower()
-        target = [x.lower() for x in command_msg.targets] if command_msg.targets else []
-        self.send_command(action, target)
 
-    def send_command(self, command):
-        try:
-            action = command[0]
-            target = command[1]
-            return self.world.send_command(action, target)
-        except error.AnchoringError as e:
-            self.handle_anchoring_error(e.object)
-        except error.GroundingError as e:
-            self.handle_grounding_error(e.object)
 
     def sphinx_callback(self, recognizer, audio):
         # recognize speech using Sphinx
