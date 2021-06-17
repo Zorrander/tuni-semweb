@@ -115,9 +115,17 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
         return stop
 
     def reset_operator(self):
-        def reset():
-            pass
-        return reset
+        self.is_waiting = False
+        print("_use_reset_operator {}...".format(target))
+        self.world.onto.agent.isReady = False
+        # req.position.layout.dim[0] = 7
+        req = NamedTarget.Request()
+        req.name = "init_pose"
+        res = self.reach_named_target.call_async(req)
+        while not res.done():
+            time.sleep(0.1)
+        self.world.dismiss_command()
+        self.release_planner()
 
     def handle_anchoring_error(self, object):
         print("REACH FINAL STAGE OF ERROR")
