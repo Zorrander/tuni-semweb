@@ -116,7 +116,7 @@ class RealCollaborativeRobot(Node, robot.CollaborativeRobotInterface):
 
     def reset_operator(self):
         self.is_waiting = False
-        print("_use_reset_operator {}...".format(target))
+        print("_use_reset_operator..")
         self.world.onto.agent.isReady = False
         # req.position.layout.dim[0] = 7
         req = NamedTarget.Request()

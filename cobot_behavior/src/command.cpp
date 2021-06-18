@@ -17,8 +17,8 @@ Command::Command(QObject *parent) :
     cmd_publisher = node->create_publisher<std_msgs::msg::String>("command", 10);
     plan_publisher = node->create_publisher<cobot_msgs::msg::Command>("plan_request", 10);
     human_ready = node->create_publisher<std_msgs::msg::Empty>("/human_ready", 10);
-    m_actionlist = QStringList() << "Give" << "Go" << "Come" << "Take" << "Store" << "Place", "Kit";
-    m_targetlist = QStringList() << "Bolt" << "Tool" << "Back" << "Here" << "Kit";
+    m_actionlist = QStringList() << "Give" << "Go" << "Come" << "Take" << "Store" << "Place" << "Kit" << "Put";
+    m_targetlist = QStringList() << "Bolt" << "Tool" << "Back" << "Here" << "Kit" << "Kit_store";
 }
 
 void Command::send(const QString cmd)
